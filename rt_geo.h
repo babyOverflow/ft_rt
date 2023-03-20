@@ -1,5 +1,8 @@
-#include <stdlib.h>
-#include "rt_math.h"
+#ifndef RT_GEO_H
+# define RT_GEO_H
+
+# include <stdlib.h>
+# include "rt_math.h"
 
 typedef int t_entity;
 
@@ -22,3 +25,4 @@ typedef struct s_world {
 	size_t elements_num;
 	size_t elements_size;
 } t_world;
+#endif
