@@ -1,11 +1,9 @@
 #ifndef RT_H
 # define RT_H
 
-typedef struct s_sampler {
-	int		resolution_x;
-	int		resolution_y;
+#include "rt_geo.h"
+#include "rt_renderer.h"
 
-}	t_sampler;
 
 enum e_printer {
 	RT_MLX
@@ -18,18 +16,7 @@ typedef struct s_printer {
 	void	(*print_image)(t_sampler *sampler);
 }	t_printer;
 
-typedef struct s_camera {
 
-}	t_camera;
-
-typedef struct s_rt_renderer {
-	t_printer	*printer;
-	t_sampler	*sampler;
-}	t_rt_renderer;
-
-typedef struct s_scene {
-	t_camera	*camera;
-}	t_scene;
 
 
 int			rt_mlx_init_printer(
