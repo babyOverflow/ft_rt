@@ -31,11 +31,7 @@ typedef struct s_scene {
 	t_camera	*camera;
 }	t_scene;
 
-int			check_files_name(int ac, char *av[]);
-int			rt_parse_files(
-				t_scene *scene,
-				char *files[],
-				int files_number);
+
 int			rt_mlx_init_printer(
 				t_printer *printer,
 				int resolution_x,
