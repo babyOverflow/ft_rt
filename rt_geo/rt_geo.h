@@ -2,10 +2,15 @@
 # define RT_GEO_H
 
 # include <stdlib.h>
-# include "rt_math.h"
+# include <math.h>
+
+# include "../rt_math.h"
+# include "rt_ray.h"
+# include "rt_bounds.h"
+# include "rt_sphere.h"
 
 typedef struct s_rgb {
-	unsigned char v[3];
+	int v[3];
 }	t_rgb;
 
 enum e_shape_type {
@@ -13,16 +18,6 @@ enum e_shape_type {
 };
 
 typedef int t_entity;
-
-typedef struct s_ray {
-	t_vector3f direction;
-	t_vector3f origin;
-} t_ray;
-
-typedef struct s_bounds {
-	t_vector3f point_max;
-	t_vector3f point_min;
-} t_bounds;
 
 typedef struct s_shape {
 	enum e_shape_type	type;
@@ -40,5 +35,6 @@ typedef struct s_world {
 
 int	ray_shape_intersect(const t_ray *ray, const t_shape *shape, float *t);
 t_shape	*ray_world_intrsect(const t_ray *ray, const t_world *world);
+int		rt_world_append_sphere(t_sphere *sphrer);
 
 #endif
