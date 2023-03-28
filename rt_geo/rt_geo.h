@@ -37,4 +37,6 @@ int	ray_shape_intersect(const t_ray *ray, const t_shape *shape, float *t);
 t_shape	*ray_world_intrsect(const t_ray *ray, const t_world *world);
 int		rt_world_append_sphere(t_sphere *sphrer);
 
+t_matrix4f	perspective(float fov, float n, float f);
+
 #endif

@@ -3,6 +3,17 @@
 
 # include "rt_geo/rt_geo.h"
 
+enum e_printer {
+	RT_MLX
+};
+
+typedef struct s_printer {
+	int		resolution_x;
+	int		resolution_y;
+	void	*data;
+	void	(*print_image)(void *printer);
+}	t_printer;
+
 typedef struct s_sampler {
 	int		resolution_x;
 	int		resolution_y;
@@ -17,6 +28,7 @@ typedef struct s_camera {
 
 typedef struct s_rt_renderer {
 	t_sampler	*sampler;
+	t_printer	*printer;
 }	t_rt_renderer;
 
 typedef struct s_ambiant {
@@ -38,7 +50,8 @@ typedef struct s_scene {
 
 void	gen_ray(int x, int y, t_ray *ray, t_camera *camera);
 t_rgb	trace_ray(t_ray *ray, t_scene *scene);
-void	rt_sampler_set_color(int x, int y, t_rgb color);
+void	rt_sampler_set_color(t_sampler *self, int x, int y, t_rgb color);
+t_rgb	rt_sampler_get_color(const t_sampler *self, int x, int y);
 
 void	rt_scene_append_shape(t_scene *self, t_shape shape);
 
