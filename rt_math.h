@@ -9,6 +9,11 @@ typedef struct s_vector3f {
 	float	z;
 } t_vector3f;
 
+typedef struct s_vector2i {
+	int	x;
+	int	y;
+}	t_vector2i;
+
 typedef struct s_point3f {
 	float	x;
 	float	y;
@@ -18,5 +23,7 @@ typedef struct s_point3f {
 typedef struct s_matrix4f {
 	float	v[4][4];
 }	t_matrix4f;
+
+t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec);
 
 #endif

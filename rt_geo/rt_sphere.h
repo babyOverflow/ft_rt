@@ -4,11 +4,13 @@
 # include "../rt_math.h"
 # include "rt_bounds.h"
 
-typedef struct s_shpere {
+typedef struct s_sphere {
 
 }	t_sphere;
 
-t_sphere	*new_shpere(t_vector3f centre, float radius);
-t_bounds	ret_sphrer_get_bounds(t_sphere *self);
+t_sphere	*new_sphere(t_vector3f centre, float radius);
+t_bounds	ret_sphere_get_bounds(t_sphere *self);
+int			ray_sphere_intersect(const t_ray *ray, const t_sphere *shape, float *t);
+
 
 #endif //RT_SPHERE_H

@@ -26,3 +26,10 @@ t_shape	*ray_world_intersect(const t_ray *ray, const t_world *world)
 		return NULL;
 	return (&world->shapes[shape_entity]);
 }
+
+int	ray_shape_intersect(const t_ray *ray, const t_shape *shape, float *t)
+{
+	if (shape->type == SPHERE)
+		return ray_sphepe_intersect(ray, shape->v, t);
+	return 0;
+}

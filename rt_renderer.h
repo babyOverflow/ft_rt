@@ -20,10 +20,13 @@ typedef struct s_sampler {
 	t_rgb	*buf;
 }	t_sampler;
 
+
 typedef struct s_camera {
 	t_vector3f	position;
 	t_vector3f	normal;
 	int			fov;
+	t_matrix4f	camera2world;
+	t_matrix4f	world2camera;
 }	t_camera;
 
 typedef struct s_rt_renderer {
@@ -48,8 +51,12 @@ typedef struct s_scene {
 	t_light		light;
 }	t_scene;
 
-void	gen_ray(int x, int y, t_ray *ray, t_camera *camera);
 t_rgb	trace_ray(t_ray *ray, t_scene *scene);
+t_ray	gen_ray(
+			const t_sampler *sample,
+			const t_camera *camera,
+			const t_vector2i *position
+			);
 void	rt_sampler_set_color(t_sampler *self, int x, int y, t_rgb color);
 t_rgb	rt_sampler_get_color(const t_sampler *self, int x, int y);
 
