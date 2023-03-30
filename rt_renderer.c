@@ -24,7 +24,7 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 	const t_world	*world = scene->world;
 	t_shape	*shape;
 
-	shape = ray_world_intrsect(ray, scene->world);
+	shape = ray_world_intersect(ray, scene->world);
 	return (shape->color);
 }
 
@@ -50,4 +50,21 @@ int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)
 	}
 	renderer->printer->print_image(renderer);
 	return (1);
+}
+
+void	rt_scene_append_shape(t_scene *self, t_shape shape)
+{
+	rt_world_append_shape(self->world, shape);
+}
+
+
+void	rt_sampler_set_color(t_sampler *self, int x, int y, t_rgb color)
+{
+	self->buf[y * self->resolution_x + x] = color;
+}
+
+t_rgb	rt_sampler_get_color(const t_sampler *self, int x, int y)
+{
+
+	return self->buf[y * self->resolution_x + x];
 }

@@ -17,9 +17,9 @@ t_shape	read_sphere(FILE* file)
 	fscanf(file, "%f,%f,%f %f %d,%d,%d\n",
 		&centre.x, &centre.y, &centre.z, &radius,
 		&ret.color.v[0], &ret.color.v[1], &ret.color.v[2]);
-	t_sphere *sphere = new_shpere(centre, radius);
+	t_sphere *sphere = new_sphere(centre, radius);
 	ret.v = sphere;
-	ret.bounds = ret_sphrer_get_bounds(sphere);
+	ret.bounds = rt_sphere_get_bounds(sphere);
 	return ret;
 }
 

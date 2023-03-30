@@ -1,8 +1,9 @@
 #ifndef RT_H
 # define RT_H
 
-#include "rt_geo/rt_geo.h"
-#include "rt_renderer.h"
+# include "rt_geo/rt_geo.h"
+# include "rt_renderer.h"
+# include "rt_parse.h"
 
 
 int			rt_mlx_init_printer(

@@ -25,5 +25,6 @@ typedef struct s_matrix4f {
 }	t_matrix4f;
 
 t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec);
+int	quadratic(t_vector3f abc, float *t0, float *t1);
 
 #endif
