@@ -10,9 +10,9 @@ t_ray	gen_ray(
 {
 	t_vector3f			direct;
 	const t_vector3f	pre_direct = (t_vector3f){
-		.x = (float)position->x / (float)sampler->resolution_x,
-		.y = (float)position->y / (float)sampler->resolution_y,
-		.z = 0
+		.x = 2 * ((float)position->x / (float)sampler->resolution_x - 0.5),
+		.y = 2 * ((float)position->y / (float)sampler->resolution_y - 0.5),
+		.z = -1.f 
 	};
 	direct = prouct_m4fv3f(&camera->world2camera, &pre_direct);
 	return (t_ray){.origin = camera->position, .direction = direct};
@@ -25,6 +25,8 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 	t_shape	*shape;
 
 	shape = ray_world_intersect(ray, scene->world);
+	if (shape == NULL)
+		return (t_rgb){0, 0, 0, 0};
 	return (shape->color);
 }
 
@@ -43,7 +45,7 @@ int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)
 		while (++sample.x < sampler->resolution_x)
 		{
 
-			gen_ray(renderer->sampler, &scenes->camera, &sample);
+			ray = gen_ray(renderer->sampler, &scenes->camera, &sample);
 			color = trace_ray(&ray, scenes);
 			rt_sampler_set_color(sampler, sample.x, sample.y, color);
 		}
@@ -54,7 +56,15 @@ int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)
 
 void	rt_scene_append_shape(t_scene *self, t_shape shape)
 {
+	if (self->world == NULL)
+		rt_exit_with_msg("char *msg");
 	rt_world_append_shape(self->world, shape);
+}
+
+int		rt_scene_init(t_scene *self)
+{
+	self->world = create_world();
+	return 1;
 }
 
 

@@ -61,5 +61,6 @@ void	rt_sampler_set_color(t_sampler *self, int x, int y, t_rgb color);
 t_rgb	rt_sampler_get_color(const t_sampler *self, int x, int y);
 
 void	rt_scene_append_shape(t_scene *self, t_shape shape);
+int		rt_scene_init(t_scene *self);
 
 #endif //RT_RENDERER_H

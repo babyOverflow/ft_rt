@@ -10,7 +10,7 @@
 # include "rt_sphere.h"
 
 typedef struct s_rgb {
-	int v[3];
+	char v[4];
 }	t_rgb;
 
 enum e_shape_type {
@@ -36,6 +36,7 @@ typedef struct s_world {
 int	ray_shape_intersect(const t_ray *ray, const t_shape *shape, float *t);
 t_shape	*ray_world_intersect(const t_ray *ray, const t_world *world);
 int		rt_world_append_shape(t_world* world, t_shape s);
+t_world	*create_world();
 
 t_matrix4f	perspective(float fov, float n, float f);
 

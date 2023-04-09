@@ -25,7 +25,7 @@ int	ray_sphere_intersect(const t_ray *ray, const t_sphere *sphere, float *t)
 		- sphere->radius * sphere->radius;
 	float t0;
 	float t1;
-	if (quadratic((t_vector3f){a, b, c}, &t0, &t1))
+	if (!quadratic((t_vector3f){a, b, c}, &t0, &t1))
 		return 0;
 	if (t0 > FLT_MAX || t1 <= 0)
 		return 0;

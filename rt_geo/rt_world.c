@@ -1,4 +1,5 @@
 #include "rt_geo.h"
+#include "rt_sphere.h"
 
 t_shape	*ray_world_intersect(const t_ray *ray, const t_world *world)
 {
@@ -61,4 +62,15 @@ int		rt_world_append_shape(t_world* world, t_shape s)
 	world->shapes[world->elements_num] = s;
 	++world->elements_num;
 	return 1;
+}
+
+t_world	*create_world()
+{
+	t_world	*ret;
+
+	ret = malloc(sizeof(t_world));
+	ret->elements_num = 0;
+	ret->elements_size = 10;
+	ret->shapes	= malloc(sizeof(t_shape) * 10);
+	return (ret);
 }
