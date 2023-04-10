@@ -51,6 +51,8 @@ typedef struct s_scene {
 	t_light		light;
 }	t_scene;
 
+
+
 t_rgb	trace_ray(t_ray *ray, t_scene *scene);
 t_ray	gen_ray(
 			const t_sampler *sample,

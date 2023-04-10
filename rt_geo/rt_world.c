@@ -1,37 +1,49 @@
 #include "rt_geo.h"
 #include "rt_sphere.h"
 
-t_shape	*ray_world_intersect(const t_ray *ray, const t_world *world)
+t_shape	*ray_world_intersect(
+	const t_ray *ray,
+	const t_world *world,
+	float *t,
+	t_intersection *inter
+)
 {
 	t_entity		shape_entity;
 	int		i;
-	float	t;
 	float	closest;
+	t_intersection	closest_inter;
 
 	i = -1;
 	shape_entity = i;
 	closest = INFINITY;
-
 	while (++i < world->elements_num)
 	{
-		if (ray_shape_intersect(ray, &world->shapes[i], &t))
+		if (ray_shape_intersect(ray, &world->shapes[i], t, inter))
 		{
-			if (t > 0 && t < closest)
+			if (*t > 0 && *t < closest)
 			{
-				closest = t;
+				closest_inter = *inter;
+				closest = *t;
 				shape_entity = i;
 			}
 		}
 	}
+	*inter = closest_inter;
+	*t = closest;
 	if (shape_entity == -1)
 		return NULL;
 	return (&world->shapes[shape_entity]);
 }
 
-int	ray_shape_intersect(const t_ray *ray, const t_shape *shape, float *t)
+int	ray_shape_intersect(
+	const t_ray *ray,
+	const t_shape *shape,
+	float *t,
+	t_intersection *inter
+)
 {
 	if (shape->type == SPHERE)
-		return ray_sphere_intersect(ray, shape->v, t);
+		return ray_sphere_intersect(ray, shape->v, t, inter);
 	return 0;
 }
 

@@ -22,11 +22,27 @@ t_ray	gen_ray(
 t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 {
 	const t_world	*world = scene->world;
-	t_shape	*shape;
+	t_shape		*shape;
+	t_intersection		intersection;
+	t_vector3f	hit_point;
+	t_ray		ray_to_light;
 
-	shape = ray_world_intersect(ray, scene->world);
+	shape = ray_world_intersect(ray, scene->world, &intersection);
 	if (shape == NULL)
 		return (t_rgb){0, 0, 0, 0};
+	// hit_point = (t_vector3f){
+	// 	.x = ray->origin.x + ray->direction.x * t,
+	// 	.y = ray->origin.y + ray->direction.y * t,
+	// 	.z = ray->origin.z + ray->direction.z * t,
+	// };
+	// ray_to_light = (t_ray){
+	// 	.origin = hit_point,
+	// 	.direction = (t_vector3f){
+	// 		.x = scene->light.position.x - hit_point.x,
+	// 		.y = scene->light.position.y - hit_point.y,
+	// 		.z = scene->light.position.z - hit_point.z,
+	// 	}
+	// };
 	return (shape->color);
 }
 

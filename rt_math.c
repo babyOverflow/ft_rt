@@ -10,6 +10,15 @@ t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec)
 	};
 }
 
+float	v3fdot(t_vector3f *v, t_vector3f *u)
+{
+	float	ret;
+	ret	= v->x * u->x +
+		v->y * u->y +
+		v->z * u->z;
+	return (ret);
+}
+
 int	quadratic(t_vector3f abc, float *t0, float *t1)
 {
 	double	discrim;

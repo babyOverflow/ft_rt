@@ -9,6 +9,11 @@
 # include "rt_bounds.h"
 # include "rt_sphere.h"
 
+typedef struct s_intersection {
+	t_vector3f	hit_point;
+	t_vector3f	normal;
+}	t_intersection;
+
 typedef struct s_rgb {
 	char v[4];
 }	t_rgb;
@@ -33,8 +38,16 @@ typedef struct s_world {
 } t_world;
 
 
-int	ray_shape_intersect(const t_ray *ray, const t_shape *shape, float *t);
-t_shape	*ray_world_intersect(const t_ray *ray, const t_world *world);
+int	ray_shape_intersect(
+			const t_ray *ray,
+			const t_shape *shape,
+			float *t,
+			t_intersection *inter);
+t_shape	*ray_world_intersect(
+				const t_ray *ray,
+				const t_world *world,
+				float *t,
+				t_intersection *inter);
 int		rt_world_append_shape(t_world* world, t_shape s);
 t_world	*create_world();
 

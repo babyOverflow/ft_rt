@@ -2,9 +2,16 @@
 #include <float.h>
 #include "rt_sphere.h"
 
-int	ray_sphere_intersect(const t_ray *ray, const t_sphere *sphere, float *t)
+int	ray_sphere_intersect(
+	const t_ray *ray,
+	const t_sphere *sphere,
+	float *t,
+	t_intersection *inter)
 {
 	t_ray	r;
+	t_vector3f	abc;
+	float t0;
+	float t1;
 
 	r.direction = ray->direction;
 	r.origin = (t_vector3f){
@@ -12,26 +19,27 @@ int	ray_sphere_intersect(const t_ray *ray, const t_sphere *sphere, float *t)
 		ray->origin.y - sphere->centre.y,
 		ray->origin.z - sphere->centre.z
 	};
-
-	float a = r.direction.x * r.direction.x
-		+ r.direction.y * r.direction.y
-		+ r.direction.z * r.direction.z;
-	float b = 2 * (r.direction.x * r.origin.x
-		+ r.direction.y * r.origin.y
-		+ r.direction.z * r.origin.z);
-	float c = r.origin.x * r.origin.x
-		+ r.origin.y * r.origin.y
-		+ r.origin.z * r.origin.z
+	abc.x = v3fdot(&(r.direction), &(r.direction));
+	abc.y = 2 * v3fdot(&(r.direction), &(r.origin));
+	abc.z = v3fdot(&(r.origin), &(r.origin))
 		- sphere->radius * sphere->radius;
-	float t0;
-	float t1;
-	if (!quadratic((t_vector3f){a, b, c}, &t0, &t1))
+	if (!quadratic(abc, &t0, &t1))
 		return 0;
 	if (t0 > FLT_MAX || t1 <= 0)
 		return 0;
 	*t = t0;
 	if (*t < 0)
 		*t = t1;
+	*inter = (t_intersection){
+		.hit_point = (t_vector3f){
+			.x = ray->origin.x + ray->direction.x * *t,
+			.y = ray->origin.y + ray->direction.y * *t,
+			.z = ray->origin.z + ray->direction.z * *t,
+		},
+		.normal = (t_vector3f){
+			inter->hit_point.x
+		}
+	};
 	return 1;
 }
 
