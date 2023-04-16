@@ -9,11 +9,6 @@
 # include "rt_bounds.h"
 # include "rt_sphere.h"
 
-typedef struct s_intersection {
-	t_vector3f	hit_point;
-	t_vector3f	normal;
-}	t_intersection;
-
 typedef struct s_rgb {
 	char v[4];
 }	t_rgb;

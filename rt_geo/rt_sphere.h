@@ -3,7 +3,11 @@
 
 # include "../rt_math.h"
 # include "rt_bounds.h"
-# include "rt_geo.h"
+
+typedef struct s_intersection {
+	t_vector3f	hit_point;
+	t_vector3f	normal;
+}	t_intersection;
 
 typedef struct s_sphere {
 	t_vector3f	centre;

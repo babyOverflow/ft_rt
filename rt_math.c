@@ -19,6 +19,22 @@ float	v3fdot(t_vector3f *v, t_vector3f *u)
 	return (ret);
 }
 
+t_vector3f	v3fnormalize(t_vector3f *v)
+{
+	t_vector3f	ret;
+	float		dot;
+	float		len;
+
+	dot = v3fdot(v, v);
+	len = sqrt(dot);
+	ret = (t_vector3f){
+		v->x / len,
+		v->y / len,
+		v->z / len,
+	};
+	return (ret);
+}
+
 int	quadratic(t_vector3f abc, float *t0, float *t1)
 {
 	double	discrim;

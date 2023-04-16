@@ -30,15 +30,20 @@ int	ray_sphere_intersect(
 	*t = t0;
 	if (*t < 0)
 		*t = t1;
-	*inter = (t_intersection){
-		.hit_point = (t_vector3f){
+	t_vector3f	hit_point = {
 			.x = ray->origin.x + ray->direction.x * *t,
 			.y = ray->origin.y + ray->direction.y * *t,
 			.z = ray->origin.z + ray->direction.z * *t,
-		},
-		.normal = (t_vector3f){
-			inter->hit_point.x
-		}
+	};
+	t_vector3f	normal = {
+		.x = hit_point.x - r.origin.x,
+		.y = hit_point.y - r.origin.y,
+		.z = hit_point.z - r.origin.z
+	};
+	normal = v3fnormalize(&normal);
+	*inter = (t_intersection){
+		.hit_point = hit_point,
+		.normal = normal
 	};
 	return 1;
 }

@@ -1,5 +1,6 @@
 #include "rt.h"
 #include "rt_geo/rt_geo.h"
+#include "rt_math.h"
 #include "rt_renderer.h"
 
 t_ray	gen_ray(
@@ -24,26 +25,26 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 	const t_world	*world = scene->world;
 	t_shape		*shape;
 	t_intersection		intersection;
-	t_vector3f	hit_point;
-	t_ray		ray_to_light;
+	float		t;
 
-	shape = ray_world_intersect(ray, scene->world, &intersection);
+	shape = ray_world_intersect(ray, scene->world, &t, &intersection);
 	if (shape == NULL)
 		return (t_rgb){0, 0, 0, 0};
-	// hit_point = (t_vector3f){
-	// 	.x = ray->origin.x + ray->direction.x * t,
-	// 	.y = ray->origin.y + ray->direction.y * t,
-	// 	.z = ray->origin.z + ray->direction.z * t,
-	// };
-	// ray_to_light = (t_ray){
-	// 	.origin = hit_point,
-	// 	.direction = (t_vector3f){
-	// 		.x = scene->light.position.x - hit_point.x,
-	// 		.y = scene->light.position.y - hit_point.y,
-	// 		.z = scene->light.position.z - hit_point.z,
-	// 	}
-	// };
-	return (shape->color);
+	t_vector3f	light_dir = {
+		.x = intersection.hit_point.x - scene->light.position.x,
+		.y = intersection.hit_point.y - scene->light.position.y,
+		.z = intersection.hit_point.z - scene->light.position.z
+	};
+	light_dir = v3fnormalize(&light_dir);
+	float d = v3fdot(&(intersection.normal), &(light_dir));
+
+	t_rgb	ret = {
+		.v[0] = shape->color.v[0] * (d * 255),
+		.v[1] = shape->color.v[1] * (d * 255),
+		.v[2] = shape->color.v[2] * (d * 255),
+		.v[3] = shape->color.v[3] * (d * 255),
+	};
+	return (ret);
 }
 
 int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)
