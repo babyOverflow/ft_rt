@@ -4,9 +4,9 @@
 t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec)
 {
 	return (t_vector3f){
-		mat->v[0][0] * vec->x + mat->v[0][1] * vec->y + mat->v[0][2] * vec->z,
-		mat->v[1][0] * vec->x + mat->v[1][1] * vec->y + mat->v[1][2] * vec->z,
-		mat->v[2][0] * vec->x + mat->v[2][1] * vec->y + mat->v[2][2] * vec->z,
+		mat->v[0][0] * vec->x + mat->v[0][1] * vec->y + mat->v[0][2] * vec->z + mat->v[0][3] * 1,
+		mat->v[1][0] * vec->x + mat->v[1][1] * vec->y + mat->v[1][2] * vec->z + mat->v[1][3] * 1,
+		mat->v[2][0] * vec->x + mat->v[2][1] * vec->y + mat->v[2][2] * vec->z + mat->v[2][3] * 1,
 	};
 }
 
@@ -16,6 +16,16 @@ float	v3fdot(t_vector3f *v, t_vector3f *u)
 	ret	= v->x * u->x +
 		v->y * u->y +
 		v->z * u->z;
+	return (ret);
+}
+
+t_vector3f	v3fcross(t_vector3f *v, t_vector3f *u)
+{
+	t_vector3f	ret;
+
+	ret.x = (v->y * u->z) - (v->z * u->y);
+	ret.y = (v->z * u->x) - (v->x * u->z);
+	ret.z = (v->x * u->y) - (v->y * u->x);
 	return (ret);
 }
 

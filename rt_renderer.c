@@ -10,12 +10,13 @@ t_ray	gen_ray(
 )
 {
 	t_vector3f			direct;
-	const t_vector3f	pre_direct = (t_vector3f){
+	t_vector3f	pre_direct = (t_vector3f){
 		.x = 2 * ((float)position->x / (float)sampler->resolution_x - 0.5),
-		.y = 2 * ((float)position->y / (float)sampler->resolution_y - 0.5),
-		.z = -1.f 
+		.y = 2 * (-(float)position->y / (float)sampler->resolution_y + 0.5),
+		.z = 1.f 
 	};
-	direct = prouct_m4fv3f(&camera->world2camera, &pre_direct);
+	pre_direct = v3fnormalize(&pre_direct);
+	direct = prouct_m4fv3f(&camera->camera2world, &pre_direct);
 	return (t_ray){.origin = camera->position, .direction = direct};
 }
 
@@ -37,12 +38,14 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 	};
 	light_dir = v3fnormalize(&light_dir);
 	float d = v3fdot(&(intersection.normal), &(light_dir));
+	if (d < 0)
+		d = 0;
 
 	t_rgb	ret = {
 		.v[0] = shape->color.v[0] * (d * 255),
 		.v[1] = shape->color.v[1] * (d * 255),
 		.v[2] = shape->color.v[2] * (d * 255),
-		.v[3] = shape->color.v[3] * (d * 255),
+		.v[3] = shape->color.v[3] ,
 	};
 	return (ret);
 }

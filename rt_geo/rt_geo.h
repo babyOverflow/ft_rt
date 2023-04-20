@@ -47,5 +47,10 @@ int		rt_world_append_shape(t_world* world, t_shape s);
 t_world	*create_world();
 
 t_matrix4f	perspective(float fov, float n, float f);
+t_matrix4f	perspective_inverse(float fov, float n, float f);
+t_matrix4f	lookat(
+				t_vector3f *pos,
+				t_vector3f *normal,
+				t_vector3f *up);
 
 #endif

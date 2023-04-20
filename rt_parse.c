@@ -16,7 +16,7 @@ t_shape	read_sphere(FILE* file)
 	t_shape		ret;
 	t_vector3f	centre;
 	float		radius;
-	int			r, g, b;
+	int	r, g, b;
 
 	fscanf(file, "%f,%f,%f ",
 		&(centre.x), &(centre.y), &(centre.z));
@@ -65,6 +65,8 @@ t_camera	read_camera(FILE* file)
 		&ret.position.x, &ret.position.y, &ret.position.z,
 		&ret.normal.x, &ret.normal.y, &ret.normal.z, &ret.fov);
 	ret.world2camera = perspective(ret.fov, 0, FLT_MAX);
+	ret.camera2world = perspective_inverse(ret.fov, 0, FLT_MAX);
+	// ret.camera2world = lookat(&(ret.position), &(ret.normal), &(t_vector3f){0, 1, 0});
 	return ret;
 }
 
