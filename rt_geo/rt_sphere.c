@@ -36,9 +36,9 @@ int	ray_sphere_intersect(
 			.z = ray->origin.z + ray->direction.z * *t,
 	};
 	t_vector3f	normal = {
-		.x = hit_point.x - r.origin.x,
-		.y = hit_point.y - r.origin.y,
-		.z = hit_point.z - r.origin.z
+		.x = hit_point.x - sphere->centre.x,
+		.y = hit_point.y - sphere->centre.y,
+		.z = hit_point.z - sphere->centre.z
 	};
 	normal = v3fnormalize(&normal);
 	*inter = (t_intersection){

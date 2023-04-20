@@ -37,14 +37,14 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 		.z = intersection.hit_point.z - scene->light.position.z
 	};
 	light_dir = v3fnormalize(&light_dir);
-	float d = v3fdot(&(intersection.normal), &(light_dir));
+	float d = -v3fdot(&(intersection.normal), &(light_dir));
 	if (d < 0)
 		d = 0;
 
 	t_rgb	ret = {
-		.v[0] = shape->color.v[0] * (d * 255),
-		.v[1] = shape->color.v[1] * (d * 255),
-		.v[2] = shape->color.v[2] * (d * 255),
+		.v[0] = shape->color.v[0] * d ,
+		.v[1] = shape->color.v[1] * d ,
+		.v[2] = shape->color.v[2] * d ,
 		.v[3] = shape->color.v[3] ,
 	};
 	return (ret);

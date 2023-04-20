@@ -10,7 +10,7 @@
 # include "rt_sphere.h"
 
 typedef struct s_rgb {
-	char v[4];
+	unsigned char v[4];
 }	t_rgb;
 
 enum e_shape_type {
