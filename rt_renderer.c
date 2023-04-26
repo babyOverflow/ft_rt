@@ -20,7 +20,7 @@ t_ray	gen_ray(
 	pre_direct = (t_vector3f){
 		.x = 2 * (((float)position->x - (sampler->resolution_x / 2.0)) / resolution_max),
 		.y = 2 * ((-(float)position->y + (sampler->resolution_y / 2.0)) / resolution_max),
-		.z = 1.f 
+		.z = 1.0f 
 	};
 	pre_direct = v3fnormalize(&pre_direct);
 	direct = prouct_m4fv3f(&camera->screen2camera, &pre_direct);
@@ -59,9 +59,9 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 	if (d > 1)
 		d = 1;
 	t_rgb	ret = {
-		.v[0] = shape->color.v[0] * d ,
-		.v[1] = shape->color.v[1] * d ,
-		.v[2] = shape->color.v[2] * d ,
+		.v[0] = (float)shape->color.v[0] * d ,
+		.v[1] = (float)shape->color.v[1] * d ,
+		.v[2] = (float)shape->color.v[2] * d ,
 		.v[3] = shape->color.v[3] ,
 	};
 	return (ret);

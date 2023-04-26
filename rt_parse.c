@@ -52,6 +52,7 @@ t_shape	read_sphere(FILE* file)
 		&radius,
 		&r, &g, &b);
 	ret.type = SPHERE;
+	ret.color.v[3] = 0;
 	ret.color.v[2] = r;
 	ret.color.v[1] = g;
 	ret.color.v[0] = b;

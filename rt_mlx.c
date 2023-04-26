@@ -13,7 +13,12 @@ typedef struct s_data {
 
 unsigned int	rt_mlx_sampler_get_color(const t_sampler *sampler, int x, int y)
 {
-	return *(unsigned int *)rt_sampler_get_color(sampler, x, y).v;
+	t_rgb			color;
+	unsigned int	mlx_color;
+
+	color = rt_sampler_get_color(sampler, x, y);
+	mlx_color = *((unsigned int *)(color.v));
+	return (mlx_color);
 }
 
 void	rt_mlx_print_image(void *renderer)
