@@ -1,6 +1,24 @@
 #include "rt_geo.h"
 #include "rt_sphere.h"
 
+int	ray_world_intersect_b(const t_ray *ray, const t_world *world, t_shape *except)
+{
+	float	t;
+	int		i;
+	t_intersection	inter;
+
+	i = -1;
+	while (++i < world->elements_num)
+	{
+		if (ray_shape_intersect(ray, &world->shapes[i], &t, &inter))
+		{
+			if (&world->shapes[i] != except)
+				return (1);
+		}
+	}
+	return (0);
+}
+
 t_shape	*ray_world_intersect(
 	const t_ray *ray,
 	const t_world *world,

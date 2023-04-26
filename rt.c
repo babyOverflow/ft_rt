@@ -43,9 +43,9 @@ int	main(int argc, char *argv[])
 	rt_scene_init(&scenes);
 	if (rt_parse_file(&scenes, argv[1]) == FAIL)
 		rt_exit_with_msg("Syntax error");
-	if (rt_mlx_init_printer(&printer, 700, 700) == FAIL)
+	if (rt_mlx_init_printer(&printer, 1700, 700) == FAIL)
 		rt_exit_with_msg("Fail to init minilibX");
-	sampler = create_default_sampler(700, 700);
+	sampler = create_default_sampler(1700, 700);
 	if (rt_init_renderer(&renderer, &printer, &sampler) == FAIL)
 		rt_exit_with_msg("Fail to init renderer");
 	rt_render_scenes(&renderer, &scenes);

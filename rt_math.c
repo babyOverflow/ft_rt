@@ -10,6 +10,16 @@ t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec)
 	};
 }
 
+t_vector3f	v3fnag(t_vector3f *v)
+{
+	return (t_vector3f)
+	{
+		.x = -v->x,
+		.y = -v->y,
+		.z = -v->z,
+	};
+}
+
 float	v3fdot(t_vector3f *v, t_vector3f *u)
 {
 	float	ret;

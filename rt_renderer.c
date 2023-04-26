@@ -1,5 +1,6 @@
 #include "rt.h"
 #include "rt_geo/rt_geo.h"
+#include "rt_geo/rt_ray.h"
 #include "rt_math.h"
 #include "rt_renderer.h"
 
@@ -9,14 +10,21 @@ t_ray	gen_ray(
 			const t_vector2i *position
 )
 {
-	t_vector3f			direct;
-	t_vector3f	pre_direct = (t_vector3f){
-		.x = 2 * ((float)position->x / (float)sampler->resolution_x - 0.5),
-		.y = 2 * (-(float)position->y / (float)sampler->resolution_y + 0.5),
+	t_vector3f	direct;
+	t_vector3f	pre_direct;
+	float		resolution_max;
+
+	resolution_max = sampler->resolution_x;
+	if (sampler->resolution_y > sampler->resolution_x)
+		resolution_max = sampler->resolution_y;
+	pre_direct = (t_vector3f){
+		.x = 2 * (((float)position->x - (sampler->resolution_x / 2.0)) / resolution_max),
+		.y = 2 * ((-(float)position->y + (sampler->resolution_y / 2.0)) / resolution_max),
 		.z = 1.f 
 	};
 	pre_direct = v3fnormalize(&pre_direct);
-	direct = prouct_m4fv3f(&camera->camera2world, &pre_direct);
+	direct = prouct_m4fv3f(&camera->screen2camera, &pre_direct);
+	direct = prouct_m4fv3f(&camera->camera2world, &direct);
 	return (t_ray){.origin = camera->position, .direction = direct};
 }
 
@@ -27,6 +35,7 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 	t_shape		*shape;
 	t_intersection		intersection;
 	float		t;
+	float		d;
 
 	shape = ray_world_intersect(ray, scene->world, &t, &intersection);
 	if (shape == NULL)
@@ -37,10 +46,18 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 		.z = intersection.hit_point.z - scene->light.position.z
 	};
 	light_dir = v3fnormalize(&light_dir);
-	float d = -v3fdot(&(intersection.normal), &(light_dir));
+	t_ray	ray_hit2ligh = (t_ray){
+		.origin = intersection.hit_point,
+		.direction = v3fnag(&light_dir)
+	};
+	d = 0;
+	if (ray_world_intersect_b(&ray_hit2ligh, scene->world, shape) == 0)
+		d = -v3fdot(&(intersection.normal), &(light_dir));
 	if (d < 0)
 		d = 0;
-
+	d += scene->ambiant.bright;
+	if (d > 1)
+		d = 1;
 	t_rgb	ret = {
 		.v[0] = shape->color.v[0] * d ,
 		.v[1] = shape->color.v[1] * d ,

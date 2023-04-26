@@ -9,6 +9,13 @@ typedef struct s_vector3f {
 	float	z;
 } t_vector3f;
 
+typedef struct s_vector4f {
+	float	x;
+	float	y;
+	float	z;
+	float	w;
+} t_vector4f;
+
 typedef struct s_vector2i {
 	int	x;
 	int	y;
@@ -28,7 +35,7 @@ t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec);
 int	quadratic(t_vector3f abc, float *t0, float *t1);
 float	v3fdot(t_vector3f *v, t_vector3f *u);
 t_vector3f	v3fnormalize(t_vector3f *v);
-float	m4fdet(t_matrix4f *m);
 t_vector3f	v3fcross(t_vector3f *v, t_vector3f *u);
+t_vector3f	v3fnag(t_vector3f *v);
 
 #endif

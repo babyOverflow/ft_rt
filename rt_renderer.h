@@ -2,6 +2,7 @@
 # define RT_RENDERER_H
 
 # include "rt_geo/rt_geo.h"
+#include "rt_math.h"
 
 enum e_printer {
 	RT_MLX
@@ -26,6 +27,7 @@ typedef struct s_camera {
 	t_vector3f	normal;
 	int			fov;
 	t_matrix4f	camera2world;
+	t_matrix4f	screen2camera;
 	t_matrix4f	world2camera;
 }	t_camera;
 

@@ -43,6 +43,7 @@ t_shape	*ray_world_intersect(
 				const t_world *world,
 				float *t,
 				t_intersection *inter);
+int	ray_world_intersect_b(const t_ray *ray, const t_world *world, t_shape *except);
 int		rt_world_append_shape(t_world* world, t_shape s);
 t_world	*create_world();
 
