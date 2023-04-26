@@ -12,6 +12,33 @@ int	check_files_name(int ac, char **av)
 	return 1;
 }
 
+t_shape	read_cylinder(FILE* file)
+{
+	t_shape		ret;
+	t_vector3f	centre;
+	t_vector3f	normal;
+	float		radius;
+	float		height;
+	int	r, g, b;
+
+	fscanf(file, "%f,%f,%f ",
+		&(centre.x), &(centre.y), &(centre.z));
+	fscanf(file, "%f,%f,%f ",
+		&(normal.x), &(normal.y), &(normal.z));
+	fscanf(file, "%f %f %d,%d,%d\n",
+		&height,
+		&radius,
+		&r, &g, &b);
+	ret.type = CYLINDER;
+	ret.color.v[2] = r;
+	ret.color.v[1] = g;
+	ret.color.v[0] = b;
+	t_cylinder *cy = new_cylinder(centre, normal, radius, height);
+	ret.v = cy;
+	// ret.bounds = rt_cylinder_get_bounds(cy);
+	return ret;
+}
+
 t_shape	read_sphere(FILE* file)
 {
 	t_shape		ret;
@@ -107,7 +134,8 @@ int	rt_parse_file(t_scene *scene, char *file_name)
 		}
 		else if (strcmp(type, "cy") == 0)
 		{
-			// TODO
+			t_shape	s = read_sphere(rt_file);
+			rt_scene_append_shape(scene, s);
 		}
 		else
 		{

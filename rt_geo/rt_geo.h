@@ -8,13 +8,15 @@
 # include "rt_ray.h"
 # include "rt_bounds.h"
 # include "rt_sphere.h"
+# include "rt_cylinder.h"
 
 typedef struct s_rgb {
 	unsigned char v[4];
 }	t_rgb;
 
 enum e_shape_type {
-	SPHERE
+	SPHERE,
+	CYLINDER
 };
 
 typedef int t_entity;

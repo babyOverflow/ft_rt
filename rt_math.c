@@ -29,7 +29,7 @@ float	v3fdot(t_vector3f *v, t_vector3f *u)
 	return (ret);
 }
 
-t_vector3f	v3fcross(t_vector3f *v, t_vector3f *u)
+t_vector3f	v3fcross(const t_vector3f *v, const t_vector3f *u)
 {
 	t_vector3f	ret;
 
