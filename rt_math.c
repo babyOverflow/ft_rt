@@ -39,7 +39,7 @@ t_vector3f	v3fcross(const t_vector3f *v, const t_vector3f *u)
 	return (ret);
 }
 
-t_vector3f	v3fnormalize(t_vector3f *v)
+t_vector3f	v3fnormalize(const t_vector3f *v)
 {
 	t_vector3f	ret;
 	float		dot;
@@ -77,4 +77,26 @@ int	quadratic(t_vector3f abc, float *t0, float *t1)
 		*t1 = discrim;
 	}
 	return 1;
+}
+
+t_matrix4f	m4frotation(float x, float y, float z)
+{
+	t_matrix4f	ret;
+
+	ret = (t_matrix4f){
+		cos(y) * cos(z),
+		sin(x) * sin(y) * cos(z) - cos(x) * sin(y),
+		cos(x) * sin(y) * cos(z) + sin(x) * sin(z),
+		0,
+		cos(y) * sin(z),
+		sin(x) * sin(y) * sin(z) + cos(x) * cos(y),
+		cos(x) * sin(y) * sin(z) - sin(x) * cos(z),
+		0,
+		-sin(y),
+		sin(x) * cos(y),
+		cos(x) * cos(y),
+		0,
+		0, 0, 0, 0
+	};
+	return (ret);
 }
