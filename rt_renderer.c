@@ -31,7 +31,6 @@ t_ray	gen_ray(
 
 t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 {
-	const t_world	*world = scene->world;
 	t_shape		*shape;
 	t_intersection		intersection;
 	float		t;

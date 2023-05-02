@@ -18,7 +18,8 @@ CFLAGS_LINUX := -L./$(MLX_LINUX) -I./$(MLX_LINUX) -lXext -lX11
 
 CFLAGS_MAC := -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-CFLAGS := $(CFLAGS_LINUX) -L/usr/lib   -lm -lz -I/usr/include
+
+CFLAGS := $(CFLAGS_MAC) -Wall -Werror -Wextra -L/usr/lib -lm -lz -I/usr/include
 
 all : $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -g -lmlx -o rt

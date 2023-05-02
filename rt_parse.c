@@ -7,6 +7,7 @@
 
 int	check_files_name(int ac, char **av)
 {
+	(void)av; // TODO
 	if (ac != 2)
 		return 0;
 	return 1;
@@ -91,13 +92,11 @@ t_light	read_light(FILE* file)
 t_camera	read_camera(FILE* file)
 {
 	t_camera	ret;
-	t_matrix4f	projection_inverse;
-	t_matrix4f	lookat_;
 
 	fscanf(file, "%f,%f,%f %f,%f,%f %d\n",
 		&ret.position.x, &ret.position.y, &ret.position.z,
 		&ret.normal.x, &ret.normal.y, &ret.normal.z, &ret.fov);
-	ret.camera2world = lookat(&(ret.position), &(ret.normal), &(t_vector3f){0, 1, 0});
+	ret.camera2world = lookat(&(ret.normal), &(t_vector3f){0, 1, 0});
 	ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
 	return ret;
 }

@@ -28,7 +28,6 @@ typedef struct s_camera {
 	int			fov;
 	t_matrix4f	camera2world;
 	t_matrix4f	screen2camera;
-	t_matrix4f	world2camera;
 }	t_camera;
 
 typedef struct s_rt_renderer {

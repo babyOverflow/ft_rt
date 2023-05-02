@@ -88,7 +88,6 @@ int	rt_bounds_ray_intersect_z(
 
 int	rt_bounds_ray_intersect(t_bounds *b, t_ray *r)
 {
-	float	inv;
 	float	t0;
 	float	t1;
 

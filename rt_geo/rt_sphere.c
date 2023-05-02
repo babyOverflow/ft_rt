@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_sphere.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 16:47:59 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/02 16:48:00 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <float.h>
 #include "rt_sphere.h"
@@ -8,44 +20,31 @@ int	ray_sphere_intersect(
 	float *t,
 	t_intersection *inter)
 {
-	t_ray	r;
+	t_ray		r;
 	t_vector3f	abc;
-	float t0;
-	float t1;
+	float		t0;
+	float		t1;
 
 	r.direction = ray->direction;
-	r.origin = (t_vector3f){
-		ray->origin.x - sphere->centre.x,
-		ray->origin.y - sphere->centre.y,
-		ray->origin.z - sphere->centre.z
-	};
+	r.origin = v3fsub(&ray->origin, &sphere->centre);
 	abc.x = v3fdot(&(r.direction), &(r.direction));
 	abc.y = 2 * v3fdot(&(r.direction), &(r.origin));
-	abc.z = v3fdot(&(r.origin), &(r.origin))
-		- sphere->radius * sphere->radius;
+	abc.z = v3fdot(&(r.origin), &(r.origin)) - sphere->radius * sphere->radius;
 	if (!quadratic(abc, &t0, &t1))
-		return 0;
+		return (0);
 	if (t0 > FLT_MAX || t1 <= 0)
-		return 0;
+		return (0);
 	*t = t0;
 	if (*t < 0)
 		*t = t1;
-	t_vector3f	hit_point = {
-			.x = ray->origin.x + ray->direction.x * *t,
-			.y = ray->origin.y + ray->direction.y * *t,
-			.z = ray->origin.z + ray->direction.z * *t,
+	inter->hit_point = (t_vector3f){
+		.x = ray->origin.x + ray->direction.x * *t,
+		.y = ray->origin.y + ray->direction.y * *t,
+		.z = ray->origin.z + ray->direction.z * *t,
 	};
-	t_vector3f	normal = {
-		.x = hit_point.x - sphere->centre.x,
-		.y = hit_point.y - sphere->centre.y,
-		.z = hit_point.z - sphere->centre.z
-	};
-	normal = v3fnormalize(&normal);
-	*inter = (t_intersection){
-		.hit_point = hit_point,
-		.normal = normal
-	};
-	return 1;
+	inter->normal = v3fsub(&inter->hit_point, &sphere->centre);
+	inter->normal = v3fnormalize(&inter->normal);
+	return (1);
 }
 
 t_sphere	*new_sphere(t_vector3f centre, float radius)

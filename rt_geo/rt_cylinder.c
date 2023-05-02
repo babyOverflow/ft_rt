@@ -31,7 +31,6 @@ int	ray_cylinder_intersect_relay2(
 )
 {
 	t_plane		plane;
-	float		t;
 	const float	m0 = magnitude->x;
 	const float	m1 = magnitude->y;
 
@@ -63,7 +62,6 @@ int	ray_cylinder_intersect_relay1(
 {
 	t_vector3f		x;
 	t_vector3f		magnitude;
-	t_vector3f		hit_disk_center;
 
 	x = v3fsub(&ray->origin, &cy->centre);
 	magnitude.x = v3fdot(&ray->direction, &cy->normal)
@@ -77,20 +75,17 @@ int	ray_cylinder_intersect_relay1(
 	}
 	if (magnitude.x < 0 || magnitude.x > cy->height)
 		return (0);
-	inter->hit_point = (t_vector3f){
-			.x = ray->origin.x + ray->direction.x * ray_magnitude->x,
-			.y = ray->origin.y + ray->direction.y * ray_magnitude->x,
-			.z = ray->origin.z + ray->direction.z * ray_magnitude->x,
-	};
-	hit_disk_center = mul_v3fs1f(&cy->normal, magnitude.x);
-	inter->normal = v3fsub(&(inter->hit_point), &cy->centre);
-	inter->normal = v3fsub(&(inter->normal), &hit_disk_center);
+	inter->hit_point = v3fadd(&ray->origin, &ray->direction);
+	inter->hit_point = mul_v3fs1f(&inter->hit_point, ray_magnitude->x);
+	inter->normal = mul_v3fs1f(&cy->normal, -magnitude.x);
+	inter->normal = v3fadd(&(inter->normal), &(inter->hit_point));
+	inter->normal = v3fsub(&(inter->normal), &cy->centre);
 	inter->normal = v3fnormalize(&(inter->normal));
 	ray_magnitude->z = ray_magnitude->x;
 	return (1);
 }
 
-int			ray_cylinder_intersect(
+int	ray_cylinder_intersect(
 	const t_ray *ray,
 	const t_cylinder *cy,
 	float *t,
@@ -109,14 +104,13 @@ int			ray_cylinder_intersect(
 	abc.x = v3fdot(&ray->direction, &ray->direction)
 		- powf(v3fdot(&ray->direction, &cy->normal), 2.0);
 	abc.y = 2 * (v3fdot(&ray->direction, &x)
-		- v3fdot(&ray->direction, &cy->normal) * v3fdot(&x, &cy->normal));
+			- v3fdot(&ray->direction, &cy->normal) * v3fdot(&x, &cy->normal));
 	abc.z = v3fdot(&x, &x) - powf(v3fdot(&x, &cy->normal), 2)
 		- (cy->diameter * cy->diameter);
-
 	if (!quadratic(abc, &(magnitude.x), &(magnitude.y)))
-		return 0;
+		return (0);
 	if (magnitude.x > FLT_MAX || magnitude.y <= 0)
-		return 0;
+		return (0);
 	if (ray_cylinder_intersect_relay1(ray, cy, &magnitude, inter) == 0)
 		return (0);
 	*t = magnitude.z;

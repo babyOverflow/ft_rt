@@ -1,11 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_world.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 16:39:49 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/02 16:39:50 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt_cylinder.h"
 #include "rt_geo.h"
 #include "rt_sphere.h"
 
-int	ray_world_intersect_b(const t_ray *ray, const t_world *world, t_shape *except)
+int	ray_world_intersect_b(
+	const t_ray *ray,
+	const t_world *world,
+	t_shape *except
+)
 {
-	float	t;
-	int		i;
+	float			t;
+	size_t			i;
 	t_intersection	inter;
 
 	i = -1;
@@ -28,8 +44,8 @@ t_shape	*ray_world_intersect(
 )
 {
 	t_entity		shape_entity;
-	int		i;
-	float	closest;
+	size_t			i;
+	float			closest;
 	t_intersection	closest_inter;
 
 	i = -1;
@@ -50,7 +66,7 @@ t_shape	*ray_world_intersect(
 	*inter = closest_inter;
 	*t = closest;
 	if (shape_entity == -1)
-		return NULL;
+		return (NULL);
 	return (&world->shapes[shape_entity]);
 }
 
@@ -62,16 +78,16 @@ int	ray_shape_intersect(
 )
 {
 	if (shape->type == SPHERE)
-		return ray_sphere_intersect(ray, shape->v, t, inter);
+		return (ray_sphere_intersect(ray, shape->v, t, inter));
 	if (shape->type == CYLINDER)
-		return ray_cylinder_intersect(ray, shape->v, t, inter);
-	return 0;
+		return (ray_cylinder_intersect(ray, shape->v, t, inter));
+	return (0);
 }
 
 int	rt_world_reserve(t_world *self, int n)
 {
 	t_shape	*tmp;
-	int		i;
+	size_t	i;
 
 	tmp = malloc(sizeof(t_shape) * n);
 	i = -1;
@@ -82,10 +98,10 @@ int	rt_world_reserve(t_world *self, int n)
 	free(self->shapes);
 	self->shapes = tmp;
 	self->elements_size = n;
-	return 1;
+	return (1);
 }
 
-int		rt_world_append_shape(t_world* world, t_shape s)
+int	rt_world_append_shape(t_world *world, t_shape s)
 {
 	if (world->elements_num >= world->elements_size)
 	{
@@ -94,16 +110,16 @@ int		rt_world_append_shape(t_world* world, t_shape s)
 	}
 	world->shapes[world->elements_num] = s;
 	++world->elements_num;
-	return 1;
+	return (1);
 }
 
-t_world	*create_world()
+t_world	*create_world(void)
 {
 	t_world	*ret;
 
 	ret = malloc(sizeof(t_world));
 	ret->elements_num = 0;
 	ret->elements_size = 10;
-	ret->shapes	= malloc(sizeof(t_shape) * 10);
+	ret->shapes = malloc(sizeof(t_shape) * 10);
 	return (ret);
 }

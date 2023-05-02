@@ -10,7 +10,7 @@ t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec)
 	};
 }
 
-t_vector3f	v3fnag(t_vector3f *v)
+t_vector3f	v3fnag(const t_vector3f *v)
 {
 	return (t_vector3f)
 	{
@@ -108,26 +108,4 @@ int	quadratic(t_vector3f abc, float *t0, float *t1)
 		*t1 = discrim;
 	}
 	return 1;
-}
-
-t_matrix4f	m4frotation(float x, float y, float z)
-{
-	t_matrix4f	ret;
-
-	ret = (t_matrix4f){
-		cos(y) * cos(z),
-		sin(x) * sin(y) * cos(z) - cos(x) * sin(y),
-		cos(x) * sin(y) * cos(z) + sin(x) * sin(z),
-		0,
-		cos(y) * sin(z),
-		sin(x) * sin(y) * sin(z) + cos(x) * cos(y),
-		cos(x) * sin(y) * sin(z) - sin(x) * cos(z),
-		0,
-		-sin(y),
-		sin(x) * cos(y),
-		cos(x) * cos(y),
-		0,
-		0, 0, 0, 0
-	};
-	return (ret);
 }
