@@ -17,7 +17,7 @@ int	rt_cond_swap_float(int c, float *a, float *b)
 	return c;
 }
 
-inline int	rt_bounds_ray_intersect_x(
+int	rt_bounds_ray_intersect_x(
 	const t_bounds *b,
 	const t_ray *r,
 	float *t0,
@@ -40,7 +40,7 @@ inline int	rt_bounds_ray_intersect_x(
 		return 1;
 }
 
-inline int	rt_bounds_ray_intersect_y(
+int	rt_bounds_ray_intersect_y(
 	const t_bounds *b,
 	const t_ray *r,
 	float *t0,
@@ -63,7 +63,7 @@ inline int	rt_bounds_ray_intersect_y(
 		return 1;
 }
 
-inline int	rt_bounds_ray_intersect_z(
+int	rt_bounds_ray_intersect_z(
 	const t_bounds *b,
 	const t_ray *r,
 	float *t0,

@@ -1,22 +1,9 @@
 #ifndef RT_H
 # define RT_H
 
-#include "rt_geo.h"
-#include "rt_renderer.h"
-
-
-enum e_printer {
-	RT_MLX
-};
-
-typedef struct s_printer {
-	int		resolution_x;
-	int		resolution_y;
-	void	*data;
-	void	(*print_image)(t_sampler *sampler);
-}	t_printer;
-
-
+# include "rt_geo/rt_geo.h"
+# include "rt_renderer.h"
+# include "rt_parse.h"
 
 
 int			rt_mlx_init_printer(
