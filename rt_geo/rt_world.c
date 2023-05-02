@@ -1,3 +1,4 @@
+#include "rt_cylinder.h"
 #include "rt_geo.h"
 #include "rt_sphere.h"
 
@@ -62,6 +63,8 @@ int	ray_shape_intersect(
 {
 	if (shape->type == SPHERE)
 		return ray_sphere_intersect(ray, shape->v, t, inter);
+	if (shape->type == CYLINDER)
+		return ray_cylinder_intersect(ray, shape->v, t, inter);
 	return 0;
 }
 

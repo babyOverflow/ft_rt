@@ -33,10 +33,13 @@ typedef struct s_matrix4f {
 
 t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec);
 int	quadratic(t_vector3f abc, float *t0, float *t1);
-float	v3fdot(t_vector3f *v, t_vector3f *u);
+float	v3fdot(const t_vector3f *v, const t_vector3f *u);
+t_vector3f	v3fsub(const t_vector3f *v, const t_vector3f *u);
+t_vector3f	v3fadd(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fnormalize(const t_vector3f *v);
 t_vector3f	v3fcross(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fnag(t_vector3f *v);
+t_vector3f	mul_v3fs1f(const t_vector3f *v, float s);
 t_matrix4f	m4frotation(float x, float y, float z);
 
 #endif

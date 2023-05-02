@@ -30,6 +30,7 @@ t_shape	read_cylinder(FILE* file)
 		&radius,
 		&r, &g, &b);
 	ret.type = CYLINDER;
+	ret.color.v[3] = 0;
 	ret.color.v[2] = r;
 	ret.color.v[1] = g;
 	ret.color.v[0] = b;
@@ -135,7 +136,7 @@ int	rt_parse_file(t_scene *scene, char *file_name)
 		}
 		else if (strcmp(type, "cy") == 0)
 		{
-			t_shape	s = read_sphere(rt_file);
+			t_shape	s = read_cylinder(rt_file);
 			rt_scene_append_shape(scene, s);
 		}
 		else
