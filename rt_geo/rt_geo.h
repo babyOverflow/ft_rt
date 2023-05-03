@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:39 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:04:47 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "rt_bounds.h"
 # include "rt_sphere.h"
 # include "rt_cylinder.h"
+# include "rt_plane.h"
 
 #define COLOR_IDX_ALPHA 3
 #define COLOR_IDX_RED 2
@@ -40,7 +41,8 @@ void	rgb_set_green_u8(t_color *self, unsigned char green);
 
 enum e_shape_type {
 	SPHERE,
-	CYLINDER
+	CYLINDER,
+	PLANE
 };
 
 typedef int	t_entity;
