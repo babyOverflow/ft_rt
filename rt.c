@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/03 15:19:09 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include "rt.h"
 
 #define FAIL 0
 
-
-
 t_sampler	create_default_sampler(int resolution_x, int resolution_y)
 {
 	t_sampler	ret;
+
 	ret.resolution_x = resolution_x;
 	ret.resolution_y = resolution_y;
-	ret.buf = malloc(sizeof(t_rgb) * resolution_x * resolution_y);
-	return ret;
+	ret.buf = malloc(sizeof(t_color) * resolution_x * resolution_y);
+	return (ret);
 }
 
 int	rt_init_renderer(
@@ -22,7 +33,7 @@ int	rt_init_renderer(
 {
 	renderer->printer = printer;
 	renderer->sampler = sampler;
-	return 1;
+	return (1);
 }
 
 void	rt_exit_with_msg(char *str)

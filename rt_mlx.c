@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 11:55:49 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:14:21 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,20 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
+
+
 unsigned int	rt_mlx_sampler_get_color(const t_sampler *sampler, int x, int y)
 {
-	t_rgb			color;
+	t_color			color;
 	unsigned int	mlx_color;
+	unsigned char	mlx_trgb[4];
 
 	color = rt_sampler_get_color(sampler, x, y);
-	mlx_color = *((unsigned int *)(color.v));
+	mlx_trgb[0] = 255 * color.v[0];
+	mlx_trgb[1] = 255 * color.v[1];
+	mlx_trgb[2] = 255 * color.v[2];
+	mlx_trgb[3] = 255 * color.v[3];
+	mlx_color = *((unsigned int *)(mlx_trgb));
 	return (mlx_color);
 }
 

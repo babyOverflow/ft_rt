@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 16:53:50 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:40:39 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,21 @@
 # include "rt_sphere.h"
 # include "rt_cylinder.h"
 
-typedef struct s_rgb {
-	unsigned char	v[4];
-}	t_rgb;
+#define COLOR_IDX_ALPHA 3
+#define COLOR_IDX_RED 2
+#define COLOR_IDX_GREEN 1
+#define COLOR_IDX_BULE 0
+
+typedef struct s_color {
+	float	v[4];
+}	t_color;
+
+
+t_color	create_color(unsigned char red, unsigned char green, unsigned char blue);
+void	rgb_set_red_u8(t_color *self, unsigned char red);
+void	rgb_set_blue_u8(t_color *self, unsigned char blue);
+void	rgb_set_green_u8(t_color *self, unsigned char green);
+
 
 enum e_shape_type {
 	SPHERE,
@@ -37,7 +49,7 @@ typedef struct s_shape {
 	enum e_shape_type	type;
 	void				*v;
 	t_bounds			bounds;
-	t_rgb				color;
+	t_color				color;
 }	t_shape;
 
 typedef struct s_world {
@@ -54,7 +66,6 @@ int			ray_shape_intersect(
 t_shape		*ray_world_intersect(
 				const t_ray *ray,
 				const t_world *world,
-				float *t,
 				t_intersection *inter);
 int			ray_world_intersect_b(
 				const t_ray *ray,

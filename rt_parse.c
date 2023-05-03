@@ -31,10 +31,7 @@ t_shape	read_cylinder(FILE* file)
 		&radius,
 		&r, &g, &b);
 	ret.type = CYLINDER;
-	ret.color.v[3] = 0;
-	ret.color.v[2] = r;
-	ret.color.v[1] = g;
-	ret.color.v[0] = b;
+	ret.color = create_color(r, g, b);
 	t_cylinder *cy = new_cylinder(centre, normal, radius, height);
 	ret.v = cy;
 	// ret.bounds = rt_cylinder_get_bounds(cy);
@@ -54,10 +51,7 @@ t_shape	read_sphere(FILE* file)
 		&radius,
 		&r, &g, &b);
 	ret.type = SPHERE;
-	ret.color.v[3] = 0;
-	ret.color.v[2] = r;
-	ret.color.v[1] = g;
-	ret.color.v[0] = b;
+	ret.color = create_color(r, g, b);
 	t_sphere *sphere = new_sphere(centre, radius);
 	ret.v = sphere;
 	ret.bounds = rt_sphere_get_bounds(sphere);
@@ -70,9 +64,7 @@ t_ambiant	read_ambiant(FILE* file)
 	int			r, g, b;
 	
 	fscanf(file, "%f %d,%d,%d\n", &ret.bright, &r, &g, &b);
-	ret.color.v[2] = r;
-	ret.color.v[1] = g;
-	ret.color.v[0] = b;
+	ret.color = create_color(r, g ,b);
 	return ret;
 }
 

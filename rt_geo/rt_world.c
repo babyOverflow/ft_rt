@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:39:49 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 16:39:50 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 15:40:28 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	ray_world_intersect_b(
 t_shape	*ray_world_intersect(
 	const t_ray *ray,
 	const t_world *world,
-	float *t,
 	t_intersection *inter
 )
 {
 	t_entity		shape_entity;
 	size_t			i;
+	float			t;
 	float			closest;
 	t_intersection	closest_inter;
 
@@ -53,18 +53,18 @@ t_shape	*ray_world_intersect(
 	closest = INFINITY;
 	while (++i < world->elements_num)
 	{
-		if (ray_shape_intersect(ray, &world->shapes[i], t, inter))
+		if (ray_shape_intersect(ray, &world->shapes[i], &t, inter))
 		{
-			if (*t > 0 && *t < closest)
+			if (t > 0 && t < closest)
 			{
 				closest_inter = *inter;
-				closest = *t;
+				closest = t;
 				shape_entity = i;
 			}
 		}
 	}
 	*inter = closest_inter;
-	*t = closest;
+	t = closest;
 	if (shape_entity == -1)
 		return (NULL);
 	return (&world->shapes[shape_entity]);

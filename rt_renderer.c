@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:33:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 11:33:02 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:37:00 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ t_ray	gen_ray(
 	return ((t_ray){.origin = camera->position, .direction = direct});
 }
 
-t_rgb	trace_ray(t_ray *ray, t_scene *scene)
+t_color	trace_ray(t_ray *ray, t_scene *scene)
 {
 	t_shape			*shape;
 	t_intersection	intersection;
-	float			t;
 	float			d;
 	t_ray			ray_hit2ligh;
+	t_color			ret;
 
-	shape = ray_world_intersect(ray, scene->world, &t, &intersection);
+	shape = ray_world_intersect(ray, scene->world, &intersection);
 	if (shape == NULL)
-		return ((t_rgb){0, 0, 0, 0});
+		return (create_color(0,0,0));
 	ray_hit2ligh.origin = intersection.hit_point;
 	ray_hit2ligh.direction = v3fsub(
 			&(scene->light.position), &(intersection.hit_point));
@@ -64,10 +64,11 @@ t_rgb	trace_ray(t_ray *ray, t_scene *scene)
 		d = v3fdot(&(intersection.normal), &(ray_hit2ligh.direction));
 	if (d < 0)
 		d = 0;
-	d += scene->ambiant.bright;
 	if (d > 1)
 		d = 1;
-	return ((t_rgb){
+	d *= scene->light.bright;
+	ret = create_color(scene->ambiant);
+	return ((t_color){
 		.v[0] = shape->color.v[0] * d, .v[1] = shape->color.v[1] * d,
 		.v[2] = shape->color.v[2] * d, .v[3] = shape->color.v[3],
 	});
@@ -78,7 +79,7 @@ int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)
 	t_sampler	*sampler;
 	t_ray		ray;
 	t_vector2i	sample;
-	t_rgb		color;
+	t_color		color;
 
 	sampler = renderer->sampler;
 	sample.y = -1;
@@ -109,12 +110,12 @@ int	rt_scene_init(t_scene *self)
 	return (1);
 }
 
-void	rt_sampler_set_color(t_sampler *self, int x, int y, t_rgb color)
+void	rt_sampler_set_color(t_sampler *self, int x, int y, t_color color)
 {
 	self->buf[y * self->resolution_x + x] = color;
 }
 
-t_rgb	rt_sampler_get_color(const t_sampler *self, int x, int y)
+t_color	rt_sampler_get_color(const t_sampler *self, int x, int y)
 {
 	return (self->buf[y * self->resolution_x + x]);
 }

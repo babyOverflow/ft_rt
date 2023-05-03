@@ -10,6 +10,7 @@ SRC := rt.c \
 	rt_geo/rt_sphere.c \
 	rt_geo/rt_cylinder.c \
 	rt_geo/rt_plane.c \
+	rt_geo/rt_color.c \
 	rt_geo/rt_world.c
 
 MLX_LINUX := minilibx-linux

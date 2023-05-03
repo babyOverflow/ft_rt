@@ -18,7 +18,7 @@ typedef struct s_printer {
 typedef struct s_sampler {
 	int		resolution_x;
 	int		resolution_y;
-	t_rgb	*buf;
+	t_color	*buf;
 }	t_sampler;
 
 typedef struct s_camera {
@@ -35,7 +35,7 @@ typedef struct s_rt_renderer {
 }	t_rt_renderer;
 
 typedef struct s_ambiant {
-	t_rgb	color;
+	t_color	color;
 	float	bright;
 }	t_ambiant;
 
@@ -51,14 +51,14 @@ typedef struct s_scene {
 	t_light		light;
 }	t_scene;
 
-t_rgb	trace_ray(t_ray *ray, t_scene *scene);
+t_color	trace_ray(t_ray *ray, t_scene *scene);
 t_ray	gen_ray(
 			const t_sampler *sample,
 			const t_camera *camera,
 			const t_vector2i *position
 			);
-void	rt_sampler_set_color(t_sampler *self, int x, int y, t_rgb color);
-t_rgb	rt_sampler_get_color(const t_sampler *self, int x, int y);
+void	rt_sampler_set_color(t_sampler *self, int x, int y, t_color color);
+t_color	rt_sampler_get_color(const t_sampler *self, int x, int y);
 
 void	rt_scene_append_shape(t_scene *self, t_shape shape);
 int		rt_scene_init(t_scene *self);
