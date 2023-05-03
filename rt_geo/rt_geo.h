@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 16:53:50 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:52:49 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "rt_bounds.h"
 # include "rt_sphere.h"
 # include "rt_cylinder.h"
+# include "rt_plane.h"
 
 typedef struct s_rgb {
 	unsigned char	v[4];
@@ -28,7 +29,8 @@ typedef struct s_rgb {
 
 enum e_shape_type {
 	SPHERE,
-	CYLINDER
+	CYLINDER,
+	PLANE
 };
 
 typedef int	t_entity;

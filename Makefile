@@ -1,25 +1,28 @@
-CC := clang
+CC := gcc
 
 SRC := rt.c \
 	rt_math.c \
 	rt_mlx.c \
-	rt_parse.c \
 	rt_renderer.c \
 	rt_geo/rt_bounds_ray_intersect.c \
 	rt_geo/rt_camera.c \
 	rt_geo/rt_sphere.c \
 	rt_geo/rt_cylinder.c \
 	rt_geo/rt_plane.c \
+	rt_parse.c \
+	rt_parse_read.c \
+	rt_parse_scanf.c \
 	rt_geo/rt_world.c
 
 MLX_LINUX := minilibx-linux
 
 CFLAGS_LINUX := -L./$(MLX_LINUX) -I./$(MLX_LINUX) -lXext -lX11
 
-CFLAGS_MAC := -Lmlx -lmlx -framework OpenGL -framework AppKit
+CFLAGS_MAC := -lmlx -framework OpenGL -framework AppKit
 
 
-CFLAGS := $(CFLAGS_MAC) -Wall -Werror -Wextra -L/usr/lib -lm -lz -I/usr/include
+CFLAGS := $(CFLAGS_MAC) ./libft/libft.a -L/usr/lib -lm -lz -I/usr/include
 
 all : $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -g -lmlx -o rt
+	$(MAKE) -C ./libft
+	$(CC)  $(CFLAGS) -g -lmlx -o rt $(SRC)
