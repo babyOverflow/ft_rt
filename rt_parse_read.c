@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/03 17:36:36 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:14:20 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,7 @@ t_shape	read_cylinder(char *line)
 	tmp = ft_split(line, ' ');
 	fscanf_cylinder(&rcy, tmp);
 	ret.type = CYLINDER;
-	ret.color.v[3] = 0;
-	ret.color.v[2] = rcy.r;
-	ret.color.v[1] = rcy.g;
-	ret.color.v[0] = rcy.b;
+	ret.color = create_color(rcy.r, rcy.g, rcy.b);
 	cy = new_cylinder(rcy.centre, rcy.normal, rcy.radius, rcy.height);
 	ret.v = cy;
 	ft_free_arr(tmp);
@@ -47,10 +44,7 @@ t_shape	read_sphere(char *line)
 	tmp = ft_split(line, ' ');
 	fscanf_sphere(&rsp, tmp);
 	ret.type = SPHERE;
-	ret.color.v[3] = 0;
-	ret.color.v[2] = rsp.r;
-	ret.color.v[1] = rsp.g;
-	ret.color.v[0] = rsp.b;
+	ret.color = create_color(rsp.r, rsp.g, rsp.b);
 	sphere = new_sphere(rsp.centre, rsp.radius);
 	ret.v = sphere;
 	ret.bounds = rt_sphere_get_bounds(sphere);
@@ -67,9 +61,10 @@ t_ambiant	read_ambiant(char *line)
 	tmp = ft_split(line, ' ');
 	ret.bright = ft_atof(tmp[1]);
 	color_tmp = ft_split(tmp[2], ',');
-	ret.color.v[2] = ft_atoi(color_tmp[0]);
-	ret.color.v[1] = ft_atoi(color_tmp[1]);
-	ret.color.v[0] = ft_atoi(color_tmp[2]);
+	ret.color = create_color(
+			ft_atoi(color_tmp[0]),
+			ft_atoi(color_tmp[1]),
+			ft_atoi(color_tmp[2]));
 	ft_free_arr(color_tmp);
 	ft_free_arr(tmp);
 	return (ret);
