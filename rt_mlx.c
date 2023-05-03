@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_mlx.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/03 11:55:49 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <mlx.h>
 #include "rt.h"
+#include "rt_math.h"
 
 typedef struct s_data {
 	void	*mlx;
@@ -24,23 +37,31 @@ unsigned int	rt_mlx_sampler_get_color(const t_sampler *sampler, int x, int y)
 void	rt_mlx_print_image(void *renderer)
 {
 	const t_printer	*p = ((t_rt_renderer*)renderer)->printer;
-	const t_sampler *s = ((t_rt_renderer*)renderer)->sampler;
-	t_data			*d = p->data;
+	const t_sampler	*s = ((t_rt_renderer*)renderer)->sampler;
+	t_data			*d;
 	char			*dst;
+	t_vector2i		pixel;
 
-	for (int y = 0; y < p->resolution_y; ++y)
+	d = p->data;
+	pixel.y = 0;
+	while (pixel.y < p->resolution_y)
 	{
-		for (int x = 0; x < p->resolution_x; ++x)
+		pixel.x = 0;
+		while (pixel.x < p->resolution_x)
 		{
-			dst = d->addr + (y * d->line_length + x * ( d->bit_per_pixel / 8)); 
-			*(unsigned int *)(dst) = rt_mlx_sampler_get_color(s, x, y);
+			dst = d->addr + (pixel.y * d->line_length
+					+ pixel.x * (d->bit_per_pixel / 8));
+			*(unsigned int *)(dst) = rt_mlx_sampler_get_color(
+					s, pixel.x, pixel.y);
+			++pixel.x;
 		}
+		++pixel.y;
 	}
 	mlx_put_image_to_window(d->mlx, d->mlx_win, d->img, 0, 0);
 	mlx_loop(d->mlx);
 }
 
-int			rt_mlx_init_printer(
+int	rt_mlx_init_printer(
 				t_printer *printer,
 				int resolution_x,
 				int resolution_y)
@@ -49,13 +70,14 @@ int			rt_mlx_init_printer(
 
 	data = malloc(sizeof(t_data));
 	data->mlx = mlx_init();
-	data->mlx_win = mlx_new_window(data->mlx, resolution_x, resolution_y, "mini rt");
+	data->mlx_win = mlx_new_window(
+			data->mlx, resolution_x, resolution_y, "mini rt");
 	data->img = mlx_new_image(data->mlx, resolution_x, resolution_y);
 	data->addr = mlx_get_data_addr(
-		data->img,
-		&data->bit_per_pixel,
-		&data->line_length,
-		&data->endian);
+			data->img,
+			&data->bit_per_pixel,
+			&data->line_length,
+			&data->endian);
 	printer->data = data;
 	printer->print_image = &rt_mlx_print_image;
 	printer->resolution_x = resolution_x;

@@ -2,7 +2,7 @@
 # define RT_RENDERER_H
 
 # include "rt_geo/rt_geo.h"
-#include "rt_math.h"
+# include "rt_math.h"
 
 enum e_printer {
 	RT_MLX
@@ -20,7 +20,6 @@ typedef struct s_sampler {
 	int		resolution_y;
 	t_rgb	*buf;
 }	t_sampler;
-
 
 typedef struct s_camera {
 	t_vector3f	position;
@@ -51,8 +50,6 @@ typedef struct s_scene {
 	t_ambiant	ambiant;	
 	t_light		light;
 }	t_scene;
-
-
 
 t_rgb	trace_ray(t_ray *ray, t_scene *scene);
 t_ray	gen_ray(

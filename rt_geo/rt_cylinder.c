@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_cylinder.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/02 21:44:24 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>
@@ -50,7 +62,7 @@ int	ray_cylinder_intersect_relay2(
 		};
 	else
 		return (0);
-	return ray_plane_intersect(ray, &plane, &(magnitude->z), inter);
+	return (ray_plane_intersect(ray, &plane, &(magnitude->z), inter));
 }
 
 int	ray_cylinder_intersect_relay1(

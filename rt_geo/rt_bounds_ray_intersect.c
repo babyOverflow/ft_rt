@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_bounds_ray_intersect.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/02 21:46:24 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/02 21:46:25 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <math.h>
 #include "rt_geo.h"
-
-#define normLN
 
 int	rt_cond_swap_float(int c, float *a, float *b)
 {
@@ -12,9 +22,9 @@ int	rt_cond_swap_float(int c, float *a, float *b)
 		tmp = *a;
 		*a = *b;
 		*b = tmp;
-		return c;
+		return (c);
 	}
-	return c;
+	return (c);
 }
 
 int	rt_bounds_ray_intersect_x(
@@ -35,9 +45,9 @@ int	rt_bounds_ray_intersect_x(
 	rt_cond_swap_float(near > *t0, &near, t0);
 	rt_cond_swap_float(far < *t1, &far, t1);
 	if (*t0 > *t1)
-		return 0;
+		return (0);
 	else
-		return 1;
+		return (1);
 }
 
 int	rt_bounds_ray_intersect_y(
@@ -58,9 +68,9 @@ int	rt_bounds_ray_intersect_y(
 	rt_cond_swap_float(near > *t0, &near, t0);
 	rt_cond_swap_float(far < *t1, &far, t1);
 	if (*t0 > *t1)
-		return 0;
+		return (0);
 	else
-		return 1;
+		return (1);
 }
 
 int	rt_bounds_ray_intersect_z(
@@ -81,9 +91,9 @@ int	rt_bounds_ray_intersect_z(
 	rt_cond_swap_float(near > *t0, &near, t0);
 	rt_cond_swap_float(far < *t1, &far, t1);
 	if (*t0 > *t1)
-		return 0;
+		return (0);
 	else
-		return 1;
+		return (1);
 }
 
 int	rt_bounds_ray_intersect(t_bounds *b, t_ray *r)
@@ -96,9 +106,9 @@ int	rt_bounds_ray_intersect(t_bounds *b, t_ray *r)
 	rt_bounds_ray_intersect_x(b, r, &t0, &t1);
 	rt_bounds_ray_intersect_y(b, r, &t0, &t1);
 	if (t0 > t1)
-		return 0;
+		return (0);
 	rt_bounds_ray_intersect_z(b, r, &t0, &t1);
 	if (t0 > t1)
-		return 0;
-	return 1;
+		return (0);
+	return (1);
 }
