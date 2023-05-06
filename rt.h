@@ -10,7 +10,9 @@ int			rt_mlx_init_printer(
 				t_printer *printer,
 				int resolution_x,
 				int resolution_y);
-t_sampler	create_default_sampler();
+t_sampler	create_default_sampler(
+				int resolution_x,
+				int resolution_y);
 int			rt_init_renderer(
 				t_rt_renderer *renderer,
 				t_printer *printer,

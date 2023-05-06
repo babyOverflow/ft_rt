@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:33:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 16:37:00 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:17:03 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 
 	shape = ray_world_intersect(ray, scene->world, &intersection);
 	if (shape == NULL)
-		return (create_color(0,0,0));
+		return (create_color(0, 0, 0));
 	ray_hit2ligh.origin = intersection.hit_point;
 	ray_hit2ligh.direction = v3fsub(
 			&(scene->light.position), &(intersection.hit_point));
@@ -64,14 +64,11 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 		d = v3fdot(&(intersection.normal), &(ray_hit2ligh.direction));
 	if (d < 0)
 		d = 0;
-	if (d > 1)
-		d = 1;
 	d *= scene->light.bright;
-	ret = create_color(scene->ambiant);
-	return ((t_color){
-		.v[0] = shape->color.v[0] * d, .v[1] = shape->color.v[1] * d,
-		.v[2] = shape->color.v[2] * d, .v[3] = shape->color.v[3],
-	});
+	ret = mul_color_s1f(&shape->color, d);
+	ret = color_add(&ret, &scene->ambiant.color);
+	ret = color_clip(&ret);
+	return (ret);
 }
 
 int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)

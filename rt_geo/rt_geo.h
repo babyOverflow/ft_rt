@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 18:04:47 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:37:42 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,14 @@
 # include "rt_cylinder.h"
 # include "rt_plane.h"
 
-#define COLOR_IDX_ALPHA 3
-#define COLOR_IDX_RED 2
-#define COLOR_IDX_GREEN 1
-#define COLOR_IDX_BULE 0
+# define COLOR_IDX_ALPHA 3
+# define COLOR_IDX_RED 2
+# define COLOR_IDX_GREEN 1
+# define COLOR_IDX_BULE 0
 
 typedef struct s_color {
 	float	v[4];
 }	t_color;
-
-
-t_color	create_color(unsigned char red, unsigned char green, unsigned char blue);
-void	rgb_set_red_u8(t_color *self, unsigned char red);
-void	rgb_set_blue_u8(t_color *self, unsigned char blue);
-void	rgb_set_green_u8(t_color *self, unsigned char green);
-
 
 enum e_shape_type {
 	SPHERE,
@@ -59,6 +52,17 @@ typedef struct s_world {
 	size_t	elements_num;
 	size_t	elements_size;
 }	t_world;
+
+t_color		color_add(t_color *a, t_color *b);
+t_color		color_clip(t_color *c);
+t_color		mul_color_s1f(t_color *c, float s);
+t_color		create_color(
+				unsigned char red,
+				unsigned char green,
+				unsigned char blue);
+void		rgb_set_red_u8(t_color *self, unsigned char red);
+void		rgb_set_blue_u8(t_color *self, unsigned char blue);
+void		rgb_set_green_u8(t_color *self, unsigned char green);
 
 int			ray_shape_intersect(
 				const t_ray *ray,

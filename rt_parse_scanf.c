@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_scanf.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:11:35 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/03 16:33:15 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:17:16 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	fscanf_plane(t_read_plane *rpl, char **tmp)
 	ft_free_arr(normal_tmp);
 	ft_free_arr(color_tmp);
 }
-
 
 void	fscanf_camera(t_read_camera *camera, t_camera *ret, char **tmp)
 {

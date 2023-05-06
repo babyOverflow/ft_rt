@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 15:14:21 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:19:28 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ typedef struct s_data {
 	int		line_length;
 	int		endian;
 }	t_data;
-
-
 
 unsigned int	rt_mlx_sampler_get_color(const t_sampler *sampler, int x, int y)
 {

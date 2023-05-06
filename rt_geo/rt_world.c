@@ -6,12 +6,13 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:39:49 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 15:40:28 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:16:19 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_cylinder.h"
 #include "rt_geo.h"
+#include "rt_plane.h"
 #include "rt_sphere.h"
 
 int	ray_world_intersect_b(
@@ -39,32 +40,30 @@ int	ray_world_intersect_b(
 t_shape	*ray_world_intersect(
 	const t_ray *ray,
 	const t_world *world,
-	t_intersection *inter
+	t_intersection *inter_out
 )
 {
 	t_entity		shape_entity;
 	size_t			i;
 	float			t;
 	float			closest;
-	t_intersection	closest_inter;
+	t_intersection	inter_tmp;
 
 	i = -1;
 	shape_entity = i;
 	closest = INFINITY;
 	while (++i < world->elements_num)
 	{
-		if (ray_shape_intersect(ray, &world->shapes[i], &t, inter))
+		if (ray_shape_intersect(ray, &world->shapes[i], &t, &inter_tmp))
 		{
 			if (t > 0 && t < closest)
 			{
-				closest_inter = *inter;
+				*inter_out = inter_tmp;
 				closest = t;
 				shape_entity = i;
 			}
 		}
 	}
-	*inter = closest_inter;
-	t = closest;
 	if (shape_entity == -1)
 		return (NULL);
 	return (&world->shapes[shape_entity]);
@@ -79,9 +78,12 @@ int	ray_shape_intersect(
 {
 	if (shape->type == SPHERE)
 		return (ray_sphere_intersect(ray, shape->v, t, inter));
-	if (shape->type == CYLINDER)
+	else if (shape->type == CYLINDER)
 		return (ray_cylinder_intersect(ray, shape->v, t, inter));
-	return (0);
+	else if (shape->type == PLANE)
+		return (ray_plane_intersect(ray, shape->v, t, inter));
+	else
+		return (0);
 }
 
 int	rt_world_reserve(t_world *self, int n)

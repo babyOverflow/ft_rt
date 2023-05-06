@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 21:44:24 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/06 09:45:17 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	ray_cylinder_intersect_relay1(
 	}
 	if (magnitude.x < 0 || magnitude.x > cy->height)
 		return (0);
-	inter->hit_point = v3fadd(&ray->origin, &ray->direction);
-	inter->hit_point = mul_v3fs1f(&inter->hit_point, ray_magnitude->x);
+	inter->hit_point = mul_v3fs1f(&ray->direction, ray_magnitude->x);
+	inter->hit_point = v3fadd(&ray->origin, &inter->hit_point);
 	inter->normal = mul_v3fs1f(&cy->normal, -magnitude.x);
 	inter->normal = v3fadd(&(inter->normal), &(inter->hit_point));
 	inter->normal = v3fsub(&(inter->normal), &cy->centre);

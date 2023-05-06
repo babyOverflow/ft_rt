@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/03 18:14:20 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:17:31 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ t_ambiant	read_ambiant(char *line)
 	tmp = ft_split(line, ' ');
 	ret.bright = ft_atof(tmp[1]);
 	color_tmp = ft_split(tmp[2], ',');
-	ret.color = create_color(
+	ret.input_color = create_color(
 			ft_atoi(color_tmp[0]),
 			ft_atoi(color_tmp[1]),
 			ft_atoi(color_tmp[2]));
+	ret.color = mul_color_s1f(&(ret.input_color), ret.bright);
 	ft_free_arr(color_tmp);
 	ft_free_arr(tmp);
 	return (ret);
@@ -118,13 +119,9 @@ t_shape	read_plane(char *line)
 	tmp = ft_split(line, ' ');
 	fscanf_plane(&rpl, tmp);
 	ret.type = PLANE;
-	ret.color.v[3] = 0;
-	ret.color.v[2] = rpl.r;
-	ret.color.v[1] = rpl.g;
-	ret.color.v[0] = rpl.b;
+	ret.color = create_color(rpl.r, rpl.g, rpl.b);
 	pl = new_plane(rpl.centre, rpl.normal);
 	ret.v = pl;
 	ft_free_arr(tmp);
 	return (ret);
 }
-

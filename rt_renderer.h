@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_renderer.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/05 16:38:29 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/05 16:38:29 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_RENDERER_H
 # define RT_RENDERER_H
 
@@ -36,6 +48,7 @@ typedef struct s_rt_renderer {
 
 typedef struct s_ambiant {
 	t_color	color;
+	t_color	input_color;
 	float	bright;
 }	t_ambiant;
 

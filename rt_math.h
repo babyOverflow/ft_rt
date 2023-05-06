@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:39:15 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/03 12:39:16 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/06 09:30:34 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct s_matrix4f {
 
 t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec);
 int			quadratic(t_vector3f abc, float *t0, float *t1);
-float		v3fdot(const t_vector3f *v, const t_vector3f *u);
+double		v3fdot(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fsub(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fadd(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fnormalize(const t_vector3f *v);

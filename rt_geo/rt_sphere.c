@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:47:59 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 16:48:00 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:39:04 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ int	ray_sphere_intersect(
 	*t = t0;
 	if (*t < 0)
 		*t = t1;
-	inter->hit_point = (t_vector3f){
-		.x = ray->origin.x + ray->direction.x * *t,
-		.y = ray->origin.y + ray->direction.y * *t,
-		.z = ray->origin.z + ray->direction.z * *t,
-	};
+	inter->hit_point = mul_v3fs1f(&ray->direction, *t);
+	inter->hit_point = v3fadd(&ray->origin, &inter->hit_point);
 	inter->normal = v3fsub(&inter->hit_point, &sphere->centre);
 	inter->normal = v3fnormalize(&inter->normal);
 	return (1);

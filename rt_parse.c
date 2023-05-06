@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:15:02 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/03 18:02:36 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/05 16:18:08 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,7 @@ int	rt_parse_file(t_scene *scene, char *file_name)
 			rt_scene_append_shape(scene, t.s);
 		}
 		else if (line[0] == '\n')
-		{
-			
-		}
+			;
 		else
 			return (0);
 		free(line);

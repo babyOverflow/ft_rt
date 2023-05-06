@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt_parse.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/05 16:17:49 by seonghyk          #+#    #+#             */
+/*   Updated: 2023/05/05 16:17:51 by seonghyk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_PARSE_H
 # define RT_PARSE_H
 
@@ -60,7 +72,7 @@ int			rt_parse_file(t_scene *scene, char *file_name);
 void		fscanf_cylinder(t_read_cylinder *rcy, char **tmp);
 void		fscanf_sphere(t_read_sphere *rsp, char **tmp);
 void		fscanf_camera(t_read_camera *camera, t_camera *ret, char **tmp);
-void	fscanf_plane(t_read_plane *rpl, char **tmp);
+void		fscanf_plane(t_read_plane *rpl, char **tmp);
 t_shape		read_cylinder(char *line);
 t_shape		read_sphere(char *line);
 t_ambiant	read_ambiant(char *line);
