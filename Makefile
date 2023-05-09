@@ -2,7 +2,10 @@ CC := clang
 
 SRC := rt.c \
 	rt_math.c \
+	rt_math_vec.c \
 	rt_mlx.c \
+	rt_scene.c \
+	rt_sampler.c \
 	rt_renderer.c \
 	rt_geo/rt_bounds_ray_intersect.c \
 	rt_geo/rt_camera.c \
@@ -13,6 +16,7 @@ SRC := rt.c \
 	rt_parse_read.c \
 	rt_parse_scanf.c \
 	rt_geo/rt_color.c \
+	rt_geo/rt_world_inter.c \
 	rt_geo/rt_world.c
 
 MLX_LINUX := minilibx-linux

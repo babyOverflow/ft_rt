@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:39:49 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 17:16:19 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 01:39:40 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,6 @@
 #include "rt_geo.h"
 #include "rt_plane.h"
 #include "rt_sphere.h"
-
-int	ray_world_intersect_b(
-	const t_ray *ray,
-	const t_world *world,
-	t_shape *except
-)
-{
-	float			t;
-	size_t			i;
-	t_intersection	inter;
-
-	i = -1;
-	while (++i < world->elements_num)
-	{
-		if (ray_shape_intersect(ray, &world->shapes[i], &t, &inter))
-		{
-			if (&world->shapes[i] != except)
-				return (1);
-		}
-	}
-	return (0);
-}
-
-t_shape	*ray_world_intersect(
-	const t_ray *ray,
-	const t_world *world,
-	t_intersection *inter_out
-)
-{
-	t_entity		shape_entity;
-	size_t			i;
-	float			t;
-	float			closest;
-	t_intersection	inter_tmp;
-
-	i = -1;
-	shape_entity = i;
-	closest = INFINITY;
-	while (++i < world->elements_num)
-	{
-		if (ray_shape_intersect(ray, &world->shapes[i], &t, &inter_tmp))
-		{
-			if (t > 0 && t < closest)
-			{
-				*inter_out = inter_tmp;
-				closest = t;
-				shape_entity = i;
-			}
-		}
-	}
-	if (shape_entity == -1)
-		return (NULL);
-	return (&world->shapes[shape_entity]);
-}
-
-int	ray_shape_intersect(
-	const t_ray *ray,
-	const t_shape *shape,
-	float *t,
-	t_intersection *inter
-)
-{
-	if (shape->type == SPHERE)
-		return (ray_sphere_intersect(ray, shape->v, t, inter));
-	else if (shape->type == CYLINDER)
-		return (ray_cylinder_intersect(ray, shape->v, t, inter));
-	else if (shape->type == PLANE)
-		return (ray_plane_intersect(ray, shape->v, t, inter));
-	else
-		return (0);
-}
 
 int	rt_world_reserve(t_world *self, int n)
 {
@@ -124,4 +53,19 @@ t_world	*create_world(void)
 	ret->elements_size = 10;
 	ret->shapes = malloc(sizeof(t_shape) * 10);
 	return (ret);
+}
+
+void	release_world(t_world *world)
+{
+	size_t	i;
+
+	if (world->shapes == NULL)
+		return ;
+	i = -1;
+	while (++i < world->elements_num)
+	{
+		free(world->shapes[i].v);
+	}
+	free(world->shapes);
+	world->shapes = NULL;
 }

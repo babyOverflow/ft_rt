@@ -6,13 +6,14 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 16:19:28 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 00:44:34 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include "rt.h"
 #include "rt_math.h"
+#include "rt_renderer.h"
 
 typedef struct s_data {
 	void	*mlx;
@@ -88,4 +89,11 @@ int	rt_mlx_init_printer(
 	printer->resolution_x = resolution_x;
 	printer->resolution_y = resolution_y;
 	return (1);
+}
+
+void	release_printer(t_printer *printer)
+{
+	if (printer->data != NULL)
+		free(printer->data);
+	printer->data = NULL;
 }

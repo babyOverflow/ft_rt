@@ -6,24 +6,16 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 17:13:03 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 02:12:40 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include "rt.h"
+#include "rt_renderer.h"
 
 #define FAIL 0
-
-t_sampler	create_default_sampler(int resolution_x, int resolution_y)
-{
-	t_sampler	ret;
-
-	ret.resolution_x = resolution_x;
-	ret.resolution_y = resolution_y;
-	ret.buf = malloc(sizeof(t_color) * resolution_x * resolution_y);
-	return (ret);
-}
 
 int	rt_init_renderer(
 	t_rt_renderer *renderer,
@@ -38,7 +30,10 @@ int	rt_init_renderer(
 
 void	rt_exit_with_msg(char *str)
 {
-	fprintf(stderr, "%s\n", str);
+	size_t	len;
+
+	ft_strlen(str);
+	write(STDOUT_FILENO, str, len);
 	exit(0);
 }
 
@@ -50,14 +45,18 @@ int	main(int argc, char *argv[])
 	t_printer		printer;
 
 	if (check_files_name(argc, argv) == FAIL)
-		rt_exit_with_msg("Invalid file name");
+		rt_exit_with_msg("Error");
 	rt_scene_init(&scenes);
 	if (rt_parse_file(&scenes, argv[1]) == FAIL)
-		rt_exit_with_msg("Syntax error");
-	if (rt_mlx_init_printer(&printer, 700, 700) == FAIL)
-		rt_exit_with_msg("Fail to init minilibX");
+	{
+		release_scene(&scenes);
+		rt_exit_with_msg("Error");
+	}
 	sampler = create_default_sampler(700, 700);
-	if (rt_init_renderer(&renderer, &printer, &sampler) == FAIL)
-		rt_exit_with_msg("Fail to init renderer");
+	rt_mlx_init_printer(&printer, 700, 700);
+	rt_init_renderer(&renderer, &printer, &sampler);
 	rt_render_scenes(&renderer, &scenes);
+	release_scene(&scenes);
+	release_sampler(&sampler);
+	release_printer(&printer);
 }

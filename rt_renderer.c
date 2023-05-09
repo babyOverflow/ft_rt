@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:33:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/09 13:28:20 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 01:45:26 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,27 +100,4 @@ int	rt_render_scenes(t_rt_renderer *renderer, t_scene *scenes)
 	}
 	renderer->printer->print_image(renderer);
 	return (1);
-}
-
-void	rt_scene_append_shape(t_scene *self, t_shape shape)
-{
-	if (self->world == NULL)
-		rt_exit_with_msg("char *msg");
-	rt_world_append_shape(self->world, shape);
-}
-
-int	rt_scene_init(t_scene *self)
-{
-	self->world = create_world();
-	return (1);
-}
-
-void	rt_sampler_set_color(t_sampler *self, int x, int y, t_color color)
-{
-	self->buf[y * self->resolution_x + x] = color;
-}
-
-t_color	rt_sampler_get_color(const t_sampler *self, int x, int y)
-{
-	return (self->buf[y * self->resolution_x + x]);
 }
