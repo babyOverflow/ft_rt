@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:47:59 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 17:39:04 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:30:42 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ray_sphere_intersect(
 	abc.z = v3fdot(&(r.origin), &(r.origin)) - sphere->radius * sphere->radius;
 	if (!quadratic(abc, &t0, &t1))
 		return (0);
-	if (t0 > FLT_MAX || t1 <= 0)
+	if (t0 > ray->max_t || t1 <= ray->min_t)
 		return (0);
 	*t = t0;
 	if (*t < 0)

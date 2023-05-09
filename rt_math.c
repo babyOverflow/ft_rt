@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:42:06 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 19:19:33 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:27:43 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ t_vector3f	prouct_m4fv3f(const t_matrix4f *mat, const t_vector3f *vec)
 		mat->v[2][0] * vec->x + mat->v[2][1] * vec->y
 			+ mat->v[2][2] * vec->z + mat->v[2][3] * 1,
 	});
+}
+
+float	v3fsize(const t_vector3f *v)
+{
+	float	tmp;
+
+	tmp = v3fdot(v, v);
+	return (sqrt(tmp));
 }
 
 t_vector3f	v3fnag(const t_vector3f *v)

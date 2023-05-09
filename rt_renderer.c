@@ -6,10 +6,11 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:33:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 16:17:03 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:28:20 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <float.h>
 #include "rt.h"
 #include "rt_geo/rt_geo.h"
 #include "rt_geo/rt_ray.h"
@@ -41,7 +42,12 @@ t_ray	gen_ray(
 	pre_direct = v3fnormalize(&pre_direct);
 	direct = prouct_m4fv3f(&camera->screen2camera, &pre_direct);
 	direct = prouct_m4fv3f(&camera->camera2world, &direct);
-	return ((t_ray){.origin = camera->position, .direction = direct});
+	return ((t_ray){
+		.origin = camera->position,
+		.direction = direct,
+		.max_t = FLT_MAX,
+		.min_t = 0
+	});
 }
 
 t_color	trace_ray(t_ray *ray, t_scene *scene)
@@ -58,6 +64,8 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 	ray_hit2ligh.origin = intersection.hit_point;
 	ray_hit2ligh.direction = v3fsub(
 			&(scene->light.position), &(intersection.hit_point));
+	ray_hit2ligh.max_t = v3fsize(&(ray_hit2ligh.direction));
+	ray_hit2ligh.min_t = 0;
 	ray_hit2ligh.direction = v3fnormalize(&(ray_hit2ligh.direction));
 	d = 0;
 	if (ray_world_intersect_b(&ray_hit2ligh, scene->world, shape) == 0)

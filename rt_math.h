@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:39:15 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/06 09:30:34 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:28:50 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_vector3f	v3fadd(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fnormalize(const t_vector3f *v);
 t_vector3f	v3fcross(const t_vector3f *v, const t_vector3f *u);
 t_vector3f	v3fnag(const t_vector3f *v);
+float		v3fsize(const t_vector3f *v);
 t_vector3f	mul_v3fs1f(const t_vector3f *v, float s);
 
 #endif
