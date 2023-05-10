@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:36:41 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/05 16:36:42 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:34:05 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_color	color_add(t_color *a, t_color *b)
 	return (ret);
 }
 
-t_color	create_color(unsigned char red, unsigned char green, unsigned char blue)
+t_color	create_color(int red, int green, int blue)
 {
 	t_color	ret;
 

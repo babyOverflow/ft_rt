@@ -13,6 +13,7 @@ SRC := rt.c \
 	rt_geo/rt_cylinder.c \
 	rt_geo/rt_plane.c \
 	rt_parse/rt_parse.c \
+	rt_parse/rt_parse_utils.c \
 	rt_parse/rt_parse_read.c \
 	rt_parse/rt_parse_read_shape.c \
 	rt_parse/rt_parse_scanf.c \
