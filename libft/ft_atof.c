@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atof.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:30:26 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/03 15:07:05 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:05:31 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ float	ft_atof(char *str)
 	below_zero(str, &num);
 	return (sign * num);
 }
-

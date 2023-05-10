@@ -26,7 +26,7 @@ CFLAGS_LINUX := -L./$(MLX_LINUX) -I./$(MLX_LINUX) -lXext -lX11
 CFLAGS_MAC := -lmlx -framework OpenGL -framework AppKit
 
 
-CFLAGS := -L./libft -lft $(CFLAGS_LINUX) -L/usr/lib -lm -lz -I/usr/include
+CFLAGS := -L./libft -lft $(CFLAGS_MAC) -L/usr/lib -lm -lz -I/usr/include
 
 all : $(SRC)
 	$(MAKE) -C ./libft

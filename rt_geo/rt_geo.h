@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 01:47:33 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 14:05:46 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			ray_world_intersect_b(
 				t_shape *except);
 int			rt_world_append_shape(t_world *world, t_shape s);
 t_world		*create_world(void);
-void	release_world(t_world *world);
+void		release_world(t_world *world);
 
 t_matrix4f	perspective(float fov, float n, float f);
 t_matrix4f	perspective_inverse(float fov, float n, float f);
