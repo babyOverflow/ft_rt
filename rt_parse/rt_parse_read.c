@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/10 17:14:39 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 19:12:20 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,12 @@ int	read_camera(t_scene *scene, char *line)
 
 	tmp = ft_split(line, ' ');
 	fscanf_camera(&camera, &ret, tmp);
-	ret.camera2world = lookat(&(ret.normal), &(t_vector3f){0, 1, 0});
+	if (!is_valid_normal(&(ret.normal)))
+		return (0);
+	ret.normal = v3fnormalize(&(ret.normal));
+	if (ret.normal.y == UP_DIRECTION.y)
+		return (0);
+	ret.camera2world = lookat(&(ret.normal), &UP_DIRECTION);
 	ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
 	free(tmp);
 	scene->camera = ret;

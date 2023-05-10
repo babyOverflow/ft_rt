@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:23:04 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 17:10:06 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:44:26 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	read_plane(t_scene *scene, char *line)
 	shape.color = create_color(rpl.r, rpl.g, rpl.b);
 	if (!is_valid_colour(&(shape.color)))
 		return (0);
+	if (!is_valid_normal(&(rpl.normal)))
+		return (0);
 	pl = new_plane(rpl.centre, rpl.normal);
 	shape.v = pl;
 	ft_free_arr(tmp);
@@ -61,6 +63,8 @@ int	read_cylinder(t_scene *scene, char *line)
 	ret.type = CYLINDER;
 	ret.color = create_color(rcy.r, rcy.g, rcy.b);
 	if (!is_valid_colour(&(ret.color)))
+		return (0);
+	if (!is_valid_normal(&(rcy.normal)))
 		return (0);
 	cy = new_cylinder(rcy.centre, rcy.normal, rcy.radius, rcy.height);
 	ret.v = cy;

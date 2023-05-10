@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:17:49 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 16:50:17 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:40:42 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	fscanf_camera(t_read_camera *camera, t_camera *ret, char **tmp);
 void	fscanf_plane(t_read_plane *rpl, char **tmp);
 
 int		is_valid_colour(t_color *color);
+int		is_valid_normal(t_vector3f *v);
+
 int		read_shape(t_scene *scene, char *line);
 int		read_cylinder(t_scene *scene, char *line);
 int		read_sphere(t_scene *scene, char *line);

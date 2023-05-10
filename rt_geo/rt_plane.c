@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:50:12 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/09 13:34:59 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:40:20 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_plane	*new_plane(t_vector3f centre, t_vector3f normal)
 
 	ret = malloc(sizeof(t_plane));
 	ret->centre = centre;
-	ret->normal = normal;
+	ret->normal = v3fnormalize(&normal);
 	return (ret);
 }
 

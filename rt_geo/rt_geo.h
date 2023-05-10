@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 17:34:17 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:42:27 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define COLOR_IDX_RED 2
 # define COLOR_IDX_GREEN 1
 # define COLOR_IDX_BULE 0
+# define UP_DIRECTION (t_vector3f){0, 1, 0}
 
 typedef struct s_color {
 	float	v[4];
