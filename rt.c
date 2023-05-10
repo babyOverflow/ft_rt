@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 15:43:18 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:36:11 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	rt_exit_with_msg(char *str)
 {
 	size_t	len;
 
-	ft_strlen(str);
+	len = ft_strlen(str);
 	write(STDOUT_FILENO, str, len);
 	exit(0);
 }
