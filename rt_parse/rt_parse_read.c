@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/10 16:50:42 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:14:39 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	read_ambiant(t_scene *scene, char *line)
 			ft_atoi(color_tmp[0]),
 			ft_atoi(color_tmp[1]),
 			ft_atoi(color_tmp[2]));
+	if (!is_valid_colour(&(ret.input_color)))
+		return (0);
 	ret.color = mul_color_s1f(&(ret.input_color), ret.bright);
 	ft_free_arr(color_tmp);
 	ft_free_arr(tmp);
@@ -43,7 +45,7 @@ int	read_light(t_scene *scene, char *line)
 	char			**tmp;
 	char			**ret_tmp;
 	char			**color_tmp;
-	t_read_light	light;
+	t_color	color;
 
 	tmp = ft_split(line, ' ');
 	ret_tmp = ft_split(tmp[1], ',');
@@ -52,9 +54,10 @@ int	read_light(t_scene *scene, char *line)
 	ret.position.z = ft_atof(ret_tmp[2]);
 	ret.bright = ft_atof(tmp[2]);
 	color_tmp = ft_split(tmp[3], ',');
-	light.r = ft_atoi(color_tmp[0]);
-	light.g = ft_atoi(color_tmp[1]);
-	light.b = ft_atoi(color_tmp[2]);
+	color = create_color(
+		ft_atoi(color_tmp[0]), ft_atoi(color_tmp[1]), ft_atoi(color_tmp[2]));
+	if (!is_valid_colour(&color))
+		return (0);
 	ft_free_arr(color_tmp);
 	ft_free_arr(ret_tmp);
 	ft_free_arr(tmp);
