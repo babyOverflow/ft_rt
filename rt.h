@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 15:32:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/09 15:32:37 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:38:35 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "rt_geo/rt_geo.h"
 # include "rt_renderer.h"
-# include "rt_parse.h"
+# include "rt_parse/rt_parse.h"
 
 int			rt_mlx_init_printer(
 				t_printer *printer,

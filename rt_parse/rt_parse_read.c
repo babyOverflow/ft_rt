@@ -6,53 +6,18 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/05 16:17:31 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/10 16:50:42 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_parse.h"
-#include "rt_geo/rt_geo.h"
-#include "rt_math.h"
+#include "../rt_geo/rt_geo.h"
+#include "../rt_math.h"
 #include <string.h>
 #include <float.h>
 #include <fcntl.h>
 
-t_shape	read_cylinder(char *line)
-{
-	t_shape			ret;
-	t_read_cylinder	rcy;
-	t_cylinder		*cy;
-	char			**tmp;
-
-	tmp = ft_split(line, ' ');
-	fscanf_cylinder(&rcy, tmp);
-	ret.type = CYLINDER;
-	ret.color = create_color(rcy.r, rcy.g, rcy.b);
-	cy = new_cylinder(rcy.centre, rcy.normal, rcy.radius, rcy.height);
-	ret.v = cy;
-	ft_free_arr(tmp);
-	return (ret);
-}
-
-t_shape	read_sphere(char *line)
-{
-	t_shape			ret;
-	char			**tmp;
-	t_sphere		*sphere;
-	t_read_sphere	rsp;
-
-	tmp = ft_split(line, ' ');
-	fscanf_sphere(&rsp, tmp);
-	ret.type = SPHERE;
-	ret.color = create_color(rsp.r, rsp.g, rsp.b);
-	sphere = new_sphere(rsp.centre, rsp.radius);
-	ret.v = sphere;
-	ret.bounds = rt_sphere_get_bounds(sphere);
-	ft_free_arr(tmp);
-	return (ret);
-}
-
-t_ambiant	read_ambiant(char *line)
+int	read_ambiant(t_scene *scene, char *line)
 {
 	t_ambiant		ret;
 	char			**tmp;
@@ -68,10 +33,11 @@ t_ambiant	read_ambiant(char *line)
 	ret.color = mul_color_s1f(&(ret.input_color), ret.bright);
 	ft_free_arr(color_tmp);
 	ft_free_arr(tmp);
-	return (ret);
+	scene->ambiant = ret;
+	return (1);
 }
 
-t_light	read_light(char *line)
+int	read_light(t_scene *scene, char *line)
 {
 	t_light			ret;
 	char			**tmp;
@@ -92,10 +58,11 @@ t_light	read_light(char *line)
 	ft_free_arr(color_tmp);
 	ft_free_arr(ret_tmp);
 	ft_free_arr(tmp);
-	return (ret);
+	scene->light = ret;
+	return (1);
 }
 
-t_camera	read_camera(char *line)
+int	read_camera(t_scene *scene, char *line)
 {
 	t_camera		ret;
 	char			**tmp;
@@ -106,22 +73,6 @@ t_camera	read_camera(char *line)
 	ret.camera2world = lookat(&(ret.normal), &(t_vector3f){0, 1, 0});
 	ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
 	free(tmp);
-	return (ret);
-}
-
-t_shape	read_plane(char *line)
-{
-	t_shape			ret;
-	char			**tmp;
-	t_read_plane	rpl;
-	t_plane			*pl;
-
-	tmp = ft_split(line, ' ');
-	fscanf_plane(&rpl, tmp);
-	ret.type = PLANE;
-	ret.color = create_color(rpl.r, rpl.g, rpl.b);
-	pl = new_plane(rpl.centre, rpl.normal);
-	ret.v = pl;
-	ft_free_arr(tmp);
-	return (ret);
+	scene->camera = ret;
+	return (1);
 }
