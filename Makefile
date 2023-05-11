@@ -1,6 +1,8 @@
-CC := clang
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+NAME = miniRT
 
-SRC := rt.c \
+SRCS := rt.c \
 	rt_math.c \
 	rt_math_vec.c \
 	rt_mlx.c \
@@ -19,15 +21,26 @@ SRC := rt.c \
 	rt_geo/rt_world_inter.c \
 	rt_geo/rt_world.c
 
-MLX_LINUX := minilibx-linux
+OBJS = $(SRCS:.c=.o)
+LIBC = -lmlx -framework OpenGL -framework AppKit
 
-CFLAGS_LINUX := -L./$(MLX_LINUX) -I./$(MLX_LINUX) -lXext -lX11
+all : $(NAME)
 
-CFLAGS_MAC := -lmlx -framework OpenGL -framework AppKit
+%.o : %.c
+	$(CC) $(CFLAGS) -Imlx -c $< -o $@
 
+$(NAME): $(OBJS)
+	$(MAKE) -C libft
+	$(CC) -o $(NAME) $(OBJS) ./libft/libft.a $(LIBC)
 
-CFLAGS := -L./libft -lft $(CFLAGS_MAC) -L/usr/lib -lm -lz -I/usr/include
-
-all : $(SRC)
-	$(MAKE) -C ./libft
-	$(CC) $(SRC) $(CFLAGS) -lmlx  -g -o rt 
+clean:
+	make clean -C libft
+	rm -rf $(OBJS)
+fclean:
+	make clean
+	make fclean -C libft
+	rm -f $(NAME)
+re:
+	make fclean
+	make all
+.PHONY: clean fclean re all
