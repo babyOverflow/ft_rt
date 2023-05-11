@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:23:04 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 17:44:26 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:52:46 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	read_sphere(t_scene *scene, char *line)
 		return (0);
 	sphere = new_sphere(rsp.centre, rsp.radius);
 	ret.v = sphere;
-	ret.bounds = rt_sphere_get_bounds(sphere);
 	ft_free_arr(tmp);
 	rt_scene_append_shape(scene, ret);
 	return (1);

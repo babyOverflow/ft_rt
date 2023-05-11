@@ -10,7 +10,6 @@ SRCS := rt.c \
 	rt_sampler.c \
 	rt_printer.c \
 	rt_renderer.c \
-	rt_geo/rt_bounds_ray_intersect.c \
 	rt_geo/rt_camera.c \
 	rt_geo/rt_sphere.c \
 	rt_geo/rt_cylinder.c \

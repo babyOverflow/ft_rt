@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 15:55:04 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:52:07 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 # include "../rt_math.h"
 # include "rt_ray.h"
-# include "rt_bounds.h"
 # include "rt_sphere.h"
 # include "rt_cylinder.h"
 # include "rt_plane.h"
@@ -43,7 +42,6 @@ typedef int	t_entity;
 typedef struct s_shape {
 	enum e_shape_type	type;
 	void				*v;
-	t_bounds			bounds;
 	t_color				color;
 }	t_shape;
 

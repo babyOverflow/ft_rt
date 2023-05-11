@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:54:27 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 16:55:23 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:52:19 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define RT_CYLINDER_H
 
 # include "../rt_math.h"
-# include "rt_bounds.h"
+# include "rt_geo.h"
 
 typedef struct s_cylinder {
 	t_vector3f	centre;
@@ -28,7 +28,6 @@ t_cylinder	*new_cylinder(
 				t_vector3f normal,
 				float height,
 				float diameter);
-t_bounds	rt_cylinder_get_bounds(t_cylinder *self);
 int			ray_cylinder_intersect(
 				const t_ray *ray,
 				const t_cylinder *shape,

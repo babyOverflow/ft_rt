@@ -6,14 +6,14 @@
 #    By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/12 17:41:06 by seycheon          #+#    #+#              #
-#    Updated: 2023/05/03 17:34:28 by seonghyk         ###   ########.fr        #
+#    Updated: 2023/05/11 16:43:33 by seonghyk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS = -c -Wall -Wextra -Werror
 NAME = libft.a
 SRCS = ft_atof.c ft_atoi.c ft_free_arr.c ft_memset.c ft_split.c ft_strncmp.c \
-		get_next_line.c get_next_line_utils.c  ft_strlen.c
+		ft_strlcpy.c get_next_line.c get_next_line_utils.c  ft_strlen.c
 
 OBJS = $(SRCS:.c=.o)
 

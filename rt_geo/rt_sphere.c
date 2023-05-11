@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:47:59 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/09 13:30:42 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:52:33 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,5 @@ t_sphere	*new_sphere(t_vector3f centre, float radius)
 	ret = malloc(sizeof(t_sphere));
 	ret->centre = centre;
 	ret->radius = radius;
-	return (ret);
-}
-
-t_bounds	rt_sphere_get_bounds(t_sphere *self)
-{
-	t_bounds	ret;
-
-	ret.point_max = (t_vector3f){
-		self->centre.x + self->radius,
-		self->centre.y + self->radius,
-		self->centre.z + self->radius,
-	};
-	ret.point_min = (t_vector3f){
-		self->centre.x - self->radius,
-		self->centre.y - self->radius,
-		self->centre.z - self->radius,
-	};
 	return (ret);
 }

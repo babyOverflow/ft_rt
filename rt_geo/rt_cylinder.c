@@ -6,14 +6,13 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/09 13:29:44 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:52:39 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>
-#include "rt_bounds.h"
 #include "rt_cylinder.h"
 #include "rt_ray.h"
 #include "rt_plane.h"
