@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/11 10:51:08 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:32:19 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int	read_ambiant(t_scene *scene, char *line)
 
 int	read_light(t_scene *scene, char *line)
 {
-	t_light			ret;
-	char			**tmp;
-	char			**ret_tmp;
-	char			**color_tmp;
+	t_light	ret;
+	char	**tmp;
+	char	**ret_tmp;
+	char	**color_tmp;
 	t_color	color;
 
 	tmp = ft_split(line, ' ');
@@ -56,8 +56,9 @@ int	read_light(t_scene *scene, char *line)
 	ret.position.z = ft_atof(ret_tmp[2]);
 	ret.bright = ft_atof(tmp[2]);
 	color_tmp = ft_split(tmp[3], ',');
-	color = create_color(
-		ft_atoi(color_tmp[0]), ft_atoi(color_tmp[1]), ft_atoi(color_tmp[2]));
+	color = create_color(ft_atoi(color_tmp[0]),
+			ft_atoi(color_tmp[1]),
+			ft_atoi(color_tmp[2]));
 	if (!is_valid_colour(&color))
 		return (0);
 	if (ret.bright < 0 || ret.bright > 1)

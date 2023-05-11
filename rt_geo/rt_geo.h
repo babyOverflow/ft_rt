@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 18:42:27 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:32:59 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define COLOR_IDX_RED 2
 # define COLOR_IDX_GREEN 1
 # define COLOR_IDX_BULE 0
-# define UP_DIRECTION (t_vector3f){0, 1, 0}
+# define UP_DIRECTION ((t_vector3f){0, 1, 0})
 
 typedef struct s_color {
 	float	v[4];
@@ -57,7 +57,7 @@ typedef struct s_world {
 t_color		color_add(t_color *a, t_color *b);
 t_color		color_clip(t_color *c);
 t_color		mul_color_s1f(t_color *c, float s);
-t_color	create_color(int red, int green, int blue);
+t_color		create_color(int red, int green, int blue);
 
 int			ray_shape_intersect(
 				const t_ray *ray,
