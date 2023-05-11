@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 11:32:59 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:55:04 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define COLOR_IDX_RED 2
 # define COLOR_IDX_GREEN 1
 # define COLOR_IDX_BULE 0
-# define UP_DIRECTION ((t_vector3f){0, 1, 0})
 
 typedef struct s_color {
 	float	v[4];
@@ -80,6 +79,6 @@ t_matrix4f	perspective(float fov, float n, float f);
 t_matrix4f	perspective_inverse(float fov, float n, float f);
 t_matrix4f	lookat(
 				t_vector3f *normal,
-				t_vector3f *up);
+				const t_vector3f *up);
 
 #endif

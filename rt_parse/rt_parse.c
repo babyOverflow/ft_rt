@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:15:02 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/11 10:45:05 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:58:02 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	rt_parse_file(t_scene *scene, char *file_name)
 {
 	int		rt_file;
 	char	*line;
-	char	type[3];
 	int		is_success;
 
 	rt_file = open(file_name, O_RDONLY);

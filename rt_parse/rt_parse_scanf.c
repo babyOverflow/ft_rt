@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:11:35 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/11 10:56:53 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:58:35 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	fscanf_camera(t_read_camera *camera, t_camera *ret, char **tmp)
 	char	**position_tmp;
 	char	**normal_tmp;
 
+	(void)camera;
 	position_tmp = ft_split(tmp[1], ',');
 	(*ret).position.x = ft_atof(position_tmp[0]);
 	(*ret).position.y = ft_atof(position_tmp[1]);

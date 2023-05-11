@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:39:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/02 16:40:42 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:54:56 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_matrix4f	perspective_inverse(float fov, float n, float f)
 
 t_matrix4f	lookat(
 	t_vector3f *normal,
-	t_vector3f *up
+	const t_vector3f *up
 )
 {
 	t_matrix4f	ret;
