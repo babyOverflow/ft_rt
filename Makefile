@@ -6,6 +6,7 @@ SRC := rt.c \
 	rt_mlx.c \
 	rt_scene.c \
 	rt_sampler.c \
+	rt_printer.c \
 	rt_renderer.c \
 	rt_geo/rt_bounds_ray_intersect.c \
 	rt_geo/rt_camera.c \
@@ -28,7 +29,7 @@ CFLAGS_LINUX := -L./$(MLX_LINUX) -I./$(MLX_LINUX) -lXext -lX11
 CFLAGS_MAC := -lmlx -framework OpenGL -framework AppKit
 
 
-CFLAGS := -L./libft -lft $(CFLAGS_MAC) -L/usr/lib -lm -lz -I/usr/include
+CFLAGS := -L./libft -lft $(CFLAGS_LINUX) -L/usr/lib -lm -lz -I/usr/include
 
 all : $(SRC)
 	$(MAKE) -C ./libft

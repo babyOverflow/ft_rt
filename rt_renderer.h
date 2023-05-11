@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:38:29 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 02:12:30 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:07:00 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 
 # include "rt_geo/rt_geo.h"
 # include "rt_math.h"
-
-enum e_printer {
-	RT_MLX
-};
 
 typedef struct s_printer {
 	int		resolution_x;
@@ -79,6 +75,10 @@ void		rt_scene_append_shape(t_scene *self, t_shape shape);
 void		release_scene(t_scene *scene);
 int			rt_scene_init(t_scene *self);
 
+int			rt_init_printer(
+				t_printer *printer,
+				int resolution_x,
+				int resolution_y);
 void		release_printer(t_printer *printer);
 
 #endif //RT_RENDERER_H
