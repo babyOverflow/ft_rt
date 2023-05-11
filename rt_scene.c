@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:45:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 02:13:53 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:36:36 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	rt_scene_append_shape(t_scene *self, t_shape shape)
 
 int	rt_scene_init(t_scene *self)
 {
+	self->camera_num = 0;
+	self->light_num = 0;
+	self->ambiant_num = 0;
 	self->world = create_world();
 	return (1);
 }

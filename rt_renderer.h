@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:38:29 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 12:07:00 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:36:00 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ typedef struct s_scene {
 	t_camera	camera;
 	t_ambiant	ambiant;	
 	t_light		light;
+	int			ambiant_num;
+	int			camera_num;
+	int			light_num;
 }	t_scene;
 
 t_color		trace_ray(t_ray *ray, t_scene *scene);
