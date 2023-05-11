@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:11:35 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/10 15:39:20 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:56:53 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ void	fscanf_camera(t_read_camera *camera, t_camera *ret, char **tmp)
 	(*ret).normal.y = ft_atof(normal_tmp[1]);
 	(*ret).normal.z = ft_atof(normal_tmp[2]);
 	(*ret).fov = ft_atoi(tmp[3]);
-	free(position_tmp);
-	free(normal_tmp);
+	ft_free_arr(position_tmp);
+	ft_free_arr(normal_tmp);
 }

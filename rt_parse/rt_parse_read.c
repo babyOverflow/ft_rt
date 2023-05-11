@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/11 10:20:55 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:51:08 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	read_camera(t_scene *scene, char *line)
 		return (0);
 	ret.camera2world = lookat(&(ret.normal), &UP_DIRECTION);
 	ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
-	free(tmp);
+	ft_free_arr(tmp);
 	scene->camera = ret;
 	return (1);
 }
