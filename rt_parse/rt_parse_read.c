@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/10 19:12:20 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:20:55 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	read_ambiant(t_scene *scene, char *line)
 			ft_atoi(color_tmp[1]),
 			ft_atoi(color_tmp[2]));
 	if (!is_valid_colour(&(ret.input_color)))
+		return (0);
+	if (ret.bright < 0 || ret.bright > 1)
 		return (0);
 	ret.color = mul_color_s1f(&(ret.input_color), ret.bright);
 	ft_free_arr(color_tmp);
@@ -58,6 +60,8 @@ int	read_light(t_scene *scene, char *line)
 		ft_atoi(color_tmp[0]), ft_atoi(color_tmp[1]), ft_atoi(color_tmp[2]));
 	if (!is_valid_colour(&color))
 		return (0);
+	if (ret.bright < 0 || ret.bright > 1)
+		return (0);
 	ft_free_arr(color_tmp);
 	ft_free_arr(ret_tmp);
 	ft_free_arr(tmp);
@@ -77,6 +81,8 @@ int	read_camera(t_scene *scene, char *line)
 		return (0);
 	ret.normal = v3fnormalize(&(ret.normal));
 	if (ret.normal.y == UP_DIRECTION.y)
+		return (0);
+	if (ret.fov < 0 || ret.fov > 180)
 		return (0);
 	ret.camera2world = lookat(&(ret.normal), &UP_DIRECTION);
 	ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
