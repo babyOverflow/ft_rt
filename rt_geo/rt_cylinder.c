@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 16:52:39 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 21:12:38 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,21 @@ int	ray_cylinder_intersect_relay(
 	return (1);
 }
 
+int	relay(
+	const t_ray *ray,
+	const t_cylinder *cy,
+	t_vector3f *magnitude,
+	t_intersection *inter
+)
+{
+	if (ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
+		return (1);
+	if (ray_cylinder_intersect_relay(ray, cy, magnitude.y, inter) == 0)
+		return (0);
+	inter->normal = v3fnag(&inter->normal);
+	*t = magnitude.y;
+}
+
 int	ray_cylinder_intersect(
 	const t_ray *ray,
 	const t_cylinder *cy,
@@ -81,8 +96,10 @@ int	ray_cylinder_intersect(
 	if (magnitude.x > ray->max_t || magnitude.y <= ray->min_t)
 		return (0);
 	*t = magnitude.x;
-	if (magnitude.x < 0)
+	if (*t < ray->min_t || *t > ray->max_t)
 		*t = magnitude.y;
+	if (*t < ray->min_t || *t > ray->max_t)
+		return (0);
 	if (ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
 		return (1);
 	if (ray_cylinder_intersect_relay(ray, cy, magnitude.y, inter) == 0)
