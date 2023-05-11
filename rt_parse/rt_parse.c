@@ -6,14 +6,13 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:15:02 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/11 15:58:02 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:46:45 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt_parse.h"
 #include "../rt_geo/rt_geo.h"
 #include "../rt_math.h"
-#include <stdio.h>
 #include <string.h>
 #include <float.h>
 #include <fcntl.h>

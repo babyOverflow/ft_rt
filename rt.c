@@ -6,11 +6,10 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 15:40:47 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:46:30 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include "rt.h"
 #include "rt_renderer.h"
