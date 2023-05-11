@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 00:44:34 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:09:31 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,21 @@ void	rt_mlx_print_image(void *renderer)
 	mlx_loop(d->mlx);
 }
 
+int	exit_hook(void)
+{
+	exit(0);
+}
+
+int	key_hook(int keycode, t_data *data)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		exit(0);
+	}
+	return (0);
+}
+
 int	rt_mlx_init_printer(
 				t_printer *printer,
 				int resolution_x,
@@ -74,6 +89,7 @@ int	rt_mlx_init_printer(
 {
 	t_data	*data;
 
+	rt_init_printer(printer, resolution_x, resolution_y);
 	data = malloc(sizeof(t_data));
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(
@@ -84,16 +100,9 @@ int	rt_mlx_init_printer(
 			&data->bit_per_pixel,
 			&data->line_length,
 			&data->endian);
+	mlx_key_hook (data->mlx_win, key_hook, data);
+	mlx_hook(data->mlx_win, 17, 0, exit_hook, data);
 	printer->data = data;
 	printer->print_image = &rt_mlx_print_image;
-	printer->resolution_x = resolution_x;
-	printer->resolution_y = resolution_y;
 	return (1);
-}
-
-void	release_printer(t_printer *printer)
-{
-	if (printer->data != NULL)
-		free(printer->data);
-	printer->data = NULL;
 }

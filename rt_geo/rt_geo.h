@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 14:05:46 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:55:04 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,7 @@ typedef struct s_world {
 t_color		color_add(t_color *a, t_color *b);
 t_color		color_clip(t_color *c);
 t_color		mul_color_s1f(t_color *c, float s);
-t_color		create_color(
-				unsigned char red,
-				unsigned char green,
-				unsigned char blue);
+t_color		create_color(int red, int green, int blue);
 
 int			ray_shape_intersect(
 				const t_ray *ray,
@@ -82,6 +79,6 @@ t_matrix4f	perspective(float fov, float n, float f);
 t_matrix4f	perspective_inverse(float fov, float n, float f);
 t_matrix4f	lookat(
 				t_vector3f *normal,
-				t_vector3f *up);
+				const t_vector3f *up);
 
 #endif

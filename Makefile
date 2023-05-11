@@ -8,15 +8,18 @@ SRCS := rt.c \
 	rt_mlx.c \
 	rt_scene.c \
 	rt_sampler.c \
+	rt_printer.c \
 	rt_renderer.c \
 	rt_geo/rt_bounds_ray_intersect.c \
 	rt_geo/rt_camera.c \
 	rt_geo/rt_sphere.c \
 	rt_geo/rt_cylinder.c \
 	rt_geo/rt_plane.c \
-	rt_parse.c \
-	rt_parse_read.c \
-	rt_parse_scanf.c \
+	rt_parse/rt_parse.c \
+	rt_parse/rt_parse_utils.c \
+	rt_parse/rt_parse_read.c \
+	rt_parse/rt_parse_read_shape.c \
+	rt_parse/rt_parse_scanf.c \
 	rt_geo/rt_color.c \
 	rt_geo/rt_world_inter.c \
 	rt_geo/rt_world.c

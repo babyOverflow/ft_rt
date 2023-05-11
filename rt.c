@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 02:12:40 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:40:47 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,16 @@ void	rt_exit_with_msg(char *str)
 {
 	size_t	len;
 
-	ft_strlen(str);
+	len = ft_strlen(str);
 	write(STDOUT_FILENO, str, len);
 	exit(0);
+}
+
+int	is_valid_scene(t_scene *s)
+{
+	if (s->ambiant_num != 1 || s->camera_num != 1 || s->light_num != 1)
+		return (0);
+	return (1);
 }
 
 int	main(int argc, char *argv[])
@@ -45,12 +52,17 @@ int	main(int argc, char *argv[])
 	t_printer		printer;
 
 	if (check_files_name(argc, argv) == FAIL)
-		rt_exit_with_msg("Error");
+		rt_exit_with_msg("Error\n");
 	rt_scene_init(&scenes);
 	if (rt_parse_file(&scenes, argv[1]) == FAIL)
 	{
 		release_scene(&scenes);
-		rt_exit_with_msg("Error");
+		rt_exit_with_msg("Error\n");
+	}
+	if (!is_valid_scene(&scenes))
+	{
+		release_scene(&scenes);
+		rt_exit_with_msg("Error\n");
 	}
 	sampler = create_default_sampler(700, 700);
 	rt_mlx_init_printer(&printer, 700, 700);
