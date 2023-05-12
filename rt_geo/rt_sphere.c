@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:47:59 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 16:52:33 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:24:04 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ int	ray_sphere_intersect(
 	abc.z = v3fdot(&(r.origin), &(r.origin)) - sphere->radius * sphere->radius;
 	if (!quadratic(abc, &t0, &t1))
 		return (0);
-	if (t0 > ray->max_t || t1 <= ray->min_t)
-		return (0);
 	*t = t0;
-	if (*t < 0)
+	if (*t < ray->min_t || *t > ray->max_t)
 		*t = t1;
+	if (*t < ray->min_t || *t > ray->max_t)
+		return (0);
 	inter->hit_point = mul_v3fs1f(&ray->direction, *t);
 	inter->hit_point = v3fadd(&ray->origin, &inter->hit_point);
 	inter->normal = v3fsub(&inter->hit_point, &sphere->centre);
 	inter->normal = v3fnormalize(&inter->normal);
+	if (*t == t1)
+		inter->normal = v3fnag(&inter->normal);
 	return (1);
 }
 

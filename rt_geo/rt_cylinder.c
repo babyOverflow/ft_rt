@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 16:52:39 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:09:07 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ int	ray_cylinder_intersect(
 		- (cy->diameter * cy->diameter);
 	if (!quadratic(abc, &(magnitude.x), &(magnitude.y)))
 		return (0);
-	if (magnitude.x > ray->max_t || magnitude.y <= ray->min_t)
-		return (0);
 	*t = magnitude.x;
-	if (magnitude.x < 0)
-		*t = magnitude.y;
-	if (ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
+	if (*t >= ray->min_t && *t <= ray->max_t
+		&& ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
 		return (1);
-	if (ray_cylinder_intersect_relay(ray, cy, magnitude.y, inter) == 0)
-		return (0);
-	inter->normal = v3fnag(&inter->normal);
 	*t = magnitude.y;
-	return (1);
+	if (*t >= ray->min_t && *t <= ray->max_t
+		&& ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
+	{
+		inter->normal = v3fnag(&inter->normal);
+		return (1);
+	}
+	return (0);
 }

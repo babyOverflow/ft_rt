@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:51:03 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 22:54:44 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:56:17 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ int	is_valid_colour(t_color *color)
 
 int	is_valid_normal(t_vector3f *v)
 {
-	if (v->x < 0 || v->x > 1)
+	if (v->x < -1 || v->x > 1)
 		return (0);
-	if (v->y < 0 || v->y > 1)
+	if (v->y < -1 || v->y > 1)
 		return (0);
-	if (v->z < 0 || v->z > 1)
+	if (v->z < -1 || v->z > 1)
 		return (0);
 	if (v3fsize(v) == 0)
 		return (0);
