@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:53:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 16:52:07 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:27:01 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ t_shape		*ray_world_intersect(
 				t_intersection *inter);
 int			ray_world_intersect_b(
 				const t_ray *ray,
-				const t_world *world,
-				t_shape *except);
+				const t_world *world);
 int			rt_world_append_shape(t_world *world, t_shape s);
 t_world		*create_world(void);
 void		release_world(t_world *world);

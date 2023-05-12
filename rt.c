@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 22:56:40 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:29:11 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "rt_renderer.h"
 
 #define FAIL 0
+#define DEFAULT_WIDTH 700
+#define DEFAULT_HEIGHT 700
 
 int	rt_init_renderer(
 	t_rt_renderer *renderer,
@@ -63,8 +65,8 @@ int	main(int argc, char *argv[])
 		release_scene(&scenes);
 		rt_exit_with_msg("Error\n");
 	}
-	sampler = create_default_sampler(700, 700);
-	rt_mlx_init_printer(&printer, 700, 700);
+	sampler = create_default_sampler(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	rt_mlx_init_printer(&printer, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	rt_init_renderer(&renderer, &printer, &sampler);
 	rt_render_scenes(&renderer, &scenes);
 	release_scene(&scenes);

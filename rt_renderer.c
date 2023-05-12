@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:33:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 19:22:49 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:27:16 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_color	trace_ray(t_ray *ray, t_scene *scene)
 	ray_hit2ligh.min_t = 0.01;
 	ray_hit2ligh.direction = v3fnormalize(&(ray_hit2ligh.direction));
 	d = 0;
-	if (ray_world_intersect_b(&ray_hit2ligh, scene->world, shape) == 0)
+	if (ray_world_intersect_b(&ray_hit2ligh, scene->world) == 0)
 		d = v3fdot(&(intersection.normal), &(ray_hit2ligh.direction));
 	if (d < 0)
 		d = 0;

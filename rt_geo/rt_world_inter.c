@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:36:32 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 20:47:18 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:27:28 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@
 
 int	ray_world_intersect_b(
 	const t_ray *ray,
-	const t_world *world,
-	t_shape *except
+	const t_world *world
 )
 {
 	float			t;
 	size_t			i;
 	t_intersection	inter;
 
-	(void)except;
 	i = -1;
 	while (++i < world->elements_num)
 	{
