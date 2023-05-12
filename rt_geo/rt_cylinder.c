@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/12 13:23:00 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:09:07 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,6 @@ int	ray_cylinder_intersect_relay(
 	inter->normal = v3fnormalize(&(inter->normal));
 	return (1);
 }
-
-// int	relay(
-// 	const t_ray *ray,
-// 	const t_cylinder *cy,
-// 	t_vector3f *magnitude,
-// 	t_intersection *inter
-// )
-// {
-// 	if (ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
-// 		return (1);
-// 	if (ray_cylinder_intersect_relay(ray, cy, magnitude.y, inter) == 0)
-// 		return (0);
-// 	inter->normal = v3fnag(&inter->normal);
-// 	*t = magnitude.y;
-// }
 
 int	ray_cylinder_intersect(
 	const t_ray *ray,
