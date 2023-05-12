@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_read_shape.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:23:04 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 16:52:46 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:11:03 by seycheon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,21 @@ int	read_plane(t_scene *scene, char *line)
 	t_read_plane	rpl;
 	t_plane			*pl;
 
-	tmp = ft_split(line, ' ');
-	fscanf_plane(&rpl, tmp);
+	tmp = rt_split(line, ' ', 4);
+	if (!tmp)
+		return (0);
+	if (!fscanf_plane(&rpl, tmp))
+	{
+		ft_free_arr(tmp);
+		return (0);
+	}
 	shape.type = PLANE;
 	shape.color = create_color(rpl.r, rpl.g, rpl.b);
-	if (!is_valid_colour(&(shape.color)))
+	if (!is_valid_colour(&(shape.color)) || !is_valid_normal(&(rpl.normal)))
+	{
+		ft_free_arr(tmp);
 		return (0);
-	if (!is_valid_normal(&(rpl.normal)))
-		return (0);
+	}
 	pl = new_plane(rpl.centre, rpl.normal);
 	shape.v = pl;
 	ft_free_arr(tmp);
@@ -58,14 +65,21 @@ int	read_cylinder(t_scene *scene, char *line)
 	t_cylinder		*cy;
 	char			**tmp;
 
-	tmp = ft_split(line, ' ');
-	fscanf_cylinder(&rcy, tmp);
+	tmp = rt_split(line, ' ', 6);
+	if (!tmp)
+		return (0);
+	if (!fscanf_cylinder(&rcy, tmp))
+	{
+		ft_free_arr(tmp);
+		return (0);
+	}
 	ret.type = CYLINDER;
 	ret.color = create_color(rcy.r, rcy.g, rcy.b);
-	if (!is_valid_colour(&(ret.color)))
+	if (!is_valid_colour(&(ret.color)) || !is_valid_normal(&(rcy.normal)))
+	{
+		ft_free_arr(tmp);
 		return (0);
-	if (!is_valid_normal(&(rcy.normal)))
-		return (0);
+	}
 	cy = new_cylinder(rcy.centre, rcy.normal, rcy.radius, rcy.height);
 	ret.v = cy;
 	ft_free_arr(tmp);
@@ -80,12 +94,21 @@ int	read_sphere(t_scene *scene, char *line)
 	t_sphere		*sphere;
 	t_read_sphere	rsp;
 
-	tmp = ft_split(line, ' ');
-	fscanf_sphere(&rsp, tmp);
+	tmp = rt_split(line, ' ', 4);
+	if (!tmp)
+		return (0);
+	if (!fscanf_sphere(&rsp, tmp))
+	{
+		ft_free_arr(tmp);
+		return (0);
+	}
 	ret.type = SPHERE;
 	ret.color = create_color(rsp.r, rsp.g, rsp.b);
 	if (!is_valid_colour(&(ret.color)))
+	{
+		ft_free_arr(tmp);
 		return (0);
+	}
 	sphere = new_sphere(rsp.centre, rsp.radius);
 	ret.v = sphere;
 	ft_free_arr(tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:51:03 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/10 18:39:15 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 22:54:44 by seycheon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,55 @@ int	is_valid_normal(t_vector3f *v)
 	if (v3fsize(v) == 0)
 		return (0);
 	return (1);
+}
+
+int	rt_split_inner(char *tmp, int j)
+{
+	int	flag;
+
+	flag = 0;
+	if (tmp[j] < '0' || tmp[j] > '9')
+	{
+		if (tmp[j] != '-' && tmp[j] != '+'
+			&& tmp[j] != ',' && tmp[j] != '.')
+			flag = 1;
+		if (j > 0 && (tmp[j] == '-' || tmp[j] == '+')
+			&& (tmp[j - 1] != ','))
+			flag = 1;
+		if (tmp[j] == '.' && (tmp[j + 1] < '0' || tmp[j + 1] > '9')
+			&& tmp[j + 1] != '\n' && tmp[j + 1] != '\0')
+			flag = 1;
+		if ((tmp[j] == ',' || tmp[j] == '.')
+			&& (tmp[j + 1] == '\n' || tmp[j + 1] == '\0'))
+			flag = 1;
+	}
+	return (flag);
+}
+
+char	**rt_split(char *line, char c, int n)
+{
+	char	**tmp;
+	int		i;
+	int		j;
+
+	tmp = ft_split(line, c);
+	i = 0;
+	while (tmp[++i])
+	{
+		j = -1;
+		while (tmp[i][++j] != '\n' && tmp[i][j])
+		{
+			if (rt_split_inner(tmp[i], j))
+			{
+				ft_free_arr(tmp);
+				return (NULL);
+			}
+		}
+	}
+	if (ft_cnt_arr(tmp) != n)
+	{
+		ft_free_arr(tmp);
+		return (NULL);
+	}
+	return (tmp);
 }

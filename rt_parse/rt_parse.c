@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:15:02 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/11 16:46:45 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/11 22:53:34 by seycheon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,31 @@ int	check_files_name(int ac, char **av)
 	if (ac == 2 && ft_strncmp(&av[1][ft_strlen(av[1]) - 3], ".rt", 3) == 0)
 		return (1);
 	return (0);
+}
+
+char	*nl2null(char **tmp)
+{
+	int	i;
+
+	i = -1;
+	while ((*tmp)[++i])
+	{
+		if ((*tmp)[i] == '\n')
+		{
+			(*tmp)[i] = '\0';
+			break ;
+		}
+	}
+	return (*tmp);
+}
+
+char	*gnl(int rt_file)
+{
+	char	*tmp;
+
+	tmp = get_next_line(rt_file);
+	tmp = nl2null(&tmp);
+	return (tmp);
 }
 
 int	rt_parse_file(t_scene *scene, char *file_name)

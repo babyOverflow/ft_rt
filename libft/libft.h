@@ -6,7 +6,7 @@
 /*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 12:25:21 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/03 16:50:22 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/11 20:20:34 by seycheon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ int		ft_atoi(char *str);
 char	*get_next_line(int fd);
 void	ft_free_arr(char **arr);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+int		ft_cnt_arr(char **arr);
 #endif

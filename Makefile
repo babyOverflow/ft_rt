@@ -19,6 +19,8 @@ SRCS := rt.c \
 	rt_parse/rt_parse_read.c \
 	rt_parse/rt_parse_read_shape.c \
 	rt_parse/rt_parse_scanf.c \
+	rt_parse/rt_parse_read_init.c \
+	rt_parse/rt_parse_read_init2.c \
 	rt_geo/rt_color.c \
 	rt_geo/rt_world_inter.c \
 	rt_geo/rt_world.c
