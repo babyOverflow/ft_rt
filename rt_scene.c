@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 01:45:47 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 15:36:36 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 05:11:47 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,6 @@ void	release_scene(t_scene *scene)
 	if (scene->world == NULL)
 		return ;
 	release_world(scene->world);
+	free(scene->world);
+	scene->world = NULL;
 }

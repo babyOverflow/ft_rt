@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:33:01 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/12 18:27:16 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/14 23:22:07 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ t_ray	gen_ray(
 			/ resolution_max),
 		.z = 1.0f
 	};
-	pre_direct = v3fnormalize(&pre_direct);
 	direct = prouct_m4fv3f(&camera->screen2camera, &pre_direct);
 	direct = prouct_m4fv3f(&camera->camera2world, &direct);
+	direct = v3fnormalize(&direct);
 	return ((t_ray){
 		.origin = camera->position,
 		.direction = direct,

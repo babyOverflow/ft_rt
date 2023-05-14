@@ -6,24 +6,15 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 16:33:48 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 06:06:38 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
+#include "minilibx-linux/mlx.h"
 #include "rt.h"
 #include "rt_math.h"
 #include "rt_renderer.h"
-
-typedef struct s_data {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img;
-	char	*addr;
-	int		bit_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
 
 unsigned int	rt_mlx_sampler_get_color(const t_sampler *sampler, int x, int y)
 {
@@ -67,17 +58,17 @@ void	rt_mlx_print_image(void *renderer)
 	mlx_loop(d->mlx);
 }
 
-int	exit_hook(void)
+int	exit_hook(t_data *data)
 {
-	exit(0);
+	mlx_loop_end(data->mlx);
+	return (0);
 }
 
 int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 53)
 	{
-		mlx_destroy_window(data->mlx, data->mlx_win);
-		exit(0);
+		mlx_loop_end(data->mlx);
 	}
 	return (0);
 }
