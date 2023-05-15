@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 21:44:23 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/12 15:09:07 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 16:51:06 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,42 @@ int	ray_cylinder_intersect_relay(
 	return (1);
 }
 
+int	ray_cylinder_intersect_relay1(
+	const t_ray *ray,
+	const t_cylinder *cy,
+	t_vector3f *m,
+	t_intersection *inter
+)
+{
+	t_vector3f	magnitude;
+	t_plane		plane;
+
+	m->z = m->x;
+	if (m->x >= ray->min_t && m->x <= ray->max_t)
+		if (ray_cylinder_intersect_relay(ray, cy, m->x, inter) == 1)
+			return (1);
+	m->z = m->y;
+	if (m->y >= ray->min_t && m->y <= ray->max_t
+		&& ray_cylinder_intersect_relay(ray, cy, m->y, inter) == 1)
+	{
+		if (m->x < ray->min_t && m->x > ray->max_t)
+		{
+			plane.normal = cy->normal;
+			plane.centre = cy->centre;
+			if (v3fdot(&cy->normal, &ray->direction) < 0)
+			{
+				t_vector3f	tmp = mul_v3fs1f(&cy->normal, cy->height);
+				plane.centre = v3fadd(&(plane.centre), &tmp);
+			}
+			ray_plane_intersect(ray, &plane, &m->z, inter);
+		}
+		else 
+			inter->normal = v3fnag(&inter->normal);
+		return (1);
+	}
+	return (0);
+}
+
 int	ray_cylinder_intersect(
 	const t_ray *ray,
 	const t_cylinder *cy,
@@ -68,6 +104,7 @@ int	ray_cylinder_intersect(
 	t_vector3f	x;
 	t_vector3f	abc;
 	t_vector3f	magnitude;
+	int			ret;
 
 	x = v3fsub(&ray->origin, &cy->centre);
 	abc.x = v3fdot(&ray->direction, &ray->direction)
@@ -78,16 +115,7 @@ int	ray_cylinder_intersect(
 		- (cy->diameter * cy->diameter);
 	if (!quadratic(abc, &(magnitude.x), &(magnitude.y)))
 		return (0);
-	*t = magnitude.x;
-	if (*t >= ray->min_t && *t <= ray->max_t
-		&& ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
-		return (1);
-	*t = magnitude.y;
-	if (*t >= ray->min_t && *t <= ray->max_t
-		&& ray_cylinder_intersect_relay(ray, cy, *t, inter) == 1)
-	{
-		inter->normal = v3fnag(&inter->normal);
-		return (1);
-	}
+	ret = ray_cylinder_intersect_relay1(ray, cy, &magnitude, inter);
+	*t = magnitude.z;
 	return (0);
 }
