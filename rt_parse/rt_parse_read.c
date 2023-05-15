@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_read.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:13:25 by seycheon          #+#    #+#             */
-/*   Updated: 2023/05/12 15:17:18 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/15 04:39:09 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,26 +84,26 @@ int	read_camera(t_scene *scene, char *line)
 	t_camera				ret;
 	char					**tmp;
 	t_read_camera			camera;
-	const static t_vector3f	default_up = {0, 1, 0};
 
 	tmp = rt_split(line, ' ', 4);
-	if (!tmp)
-		return (0);
-	if (!fscanf_camera(&camera, &ret, tmp) || !is_valid_normal(&(ret.normal)))
+	while (tmp != NULL)
 	{
+		if (!fscanf_camera(&camera, &ret, tmp))
+			break ;
+		if (!is_valid_normal(&(ret.normal)) || (ret.fov < 0 || ret.fov > 180))
+			break ;
+		ret.normal = v3fnormalize(&(ret.normal));
+		if (fabs(ret.normal.y) == 1)
+			ret.camera2world = lookat(&(ret.normal), &(t_vector3f){0, 0, -1});
+		else
+			ret.camera2world = lookat(&(ret.normal), &(t_vector3f){0, 1, 0});
+		ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
 		ft_free_arr(tmp);
-		return (0);
+		scene->camera = ret;
+		scene->camera_num += 1;
+		return (1);
 	}
-	ret.normal = v3fnormalize(&(ret.normal));
-	if (ret.normal.y == default_up.y || (ret.fov < 0 || ret.fov > 180))
-	{
+	if (tmp != NULL)
 		ft_free_arr(tmp);
-		return (0);
-	}
-	ret.camera2world = lookat(&(ret.normal), &default_up);
-	ret.screen2camera = perspective_inverse(ret.fov, 0, FLT_MAX);
-	ft_free_arr(tmp);
-	scene->camera = ret;
-	scene->camera_num += 1;
-	return (1);
+	return (0);
 }

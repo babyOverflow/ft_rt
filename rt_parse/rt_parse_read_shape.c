@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt_parse_read_shape.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seycheon <seycheon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 16:23:04 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/12 15:11:03 by seycheon         ###   ########.fr       */
+/*   Updated: 2023/05/14 23:28:41 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	read_cylinder(t_scene *scene, char *line)
 {
 	t_shape			ret;
 	t_read_cylinder	rcy;
-	t_cylinder		*cy;
 	char			**tmp;
 
 	tmp = rt_split(line, ' ', 6);
@@ -75,13 +74,13 @@ int	read_cylinder(t_scene *scene, char *line)
 	}
 	ret.type = CYLINDER;
 	ret.color = create_color(rcy.r, rcy.g, rcy.b);
-	if (!is_valid_colour(&(ret.color)) || !is_valid_normal(&(rcy.normal)))
+	if (!is_valid_colour(&(ret.color)) || !is_valid_normal(&(rcy.normal))
+		|| rcy.height < 0 || rcy.radius < 0)
 	{
 		ft_free_arr(tmp);
 		return (0);
 	}
-	cy = new_cylinder(rcy.centre, rcy.normal, rcy.radius, rcy.height);
-	ret.v = cy;
+	ret.v = new_cylinder(rcy.centre, rcy.normal, rcy.radius, rcy.height);
 	ft_free_arr(tmp);
 	rt_scene_append_shape(scene, ret);
 	return (1);
@@ -104,7 +103,7 @@ int	read_sphere(t_scene *scene, char *line)
 	}
 	ret.type = SPHERE;
 	ret.color = create_color(rsp.r, rsp.g, rsp.b);
-	if (!is_valid_colour(&(ret.color)))
+	if (!is_valid_colour(&(ret.color)) || rsp.radius < 0)
 	{
 		ft_free_arr(tmp);
 		return (0);
