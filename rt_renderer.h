@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 16:38:29 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/11 15:36:00 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:36:17 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ int			rt_init_printer(
 				t_printer *printer,
 				int resolution_x,
 				int resolution_y);
-void		release_printer(t_printer *printer);
+void		release_mlx_printer(t_printer *printer);
 
 #endif //RT_RENDERER_H

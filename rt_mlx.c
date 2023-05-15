@@ -6,12 +6,11 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:55:48 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/15 06:06:38 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:34:02 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
-#include "minilibx-linux/mlx.h"
 #include "rt.h"
 #include "rt_math.h"
 #include "rt_renderer.h"
@@ -58,17 +57,17 @@ void	rt_mlx_print_image(void *renderer)
 	mlx_loop(d->mlx);
 }
 
-int	exit_hook(t_data *data)
+int	exit_hook(void)
 {
-	mlx_loop_end(data->mlx);
-	return (0);
+	exit(0);
 }
 
 int	key_hook(int keycode, t_data *data)
 {
 	if (keycode == 53)
 	{
-		mlx_loop_end(data->mlx);
+		mlx_destroy_window(data->mlx, data->mlx_win);
+		exit(0);
 	}
 	return (0);
 }

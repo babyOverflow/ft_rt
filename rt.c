@@ -6,7 +6,7 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:27:30 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/15 05:31:19 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:38:05 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int	main(int argc, char *argv[])
 	rt_render_scenes(&renderer, &scenes);
 	release_scene(&scenes);
 	release_sampler(&sampler);
-	release_printer(&printer);
-	write(STDOUT_FILENO, "hello\n", 6);
+	release_mlx_printer(&printer);
 }

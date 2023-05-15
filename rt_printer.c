@@ -6,11 +6,11 @@
 /*   By: seonghyk <seonghyk@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 11:46:10 by seonghyk          #+#    #+#             */
-/*   Updated: 2023/05/15 06:05:59 by seonghyk         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:35:35 by seonghyk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minilibx-linux/mlx.h"
+#include <mlx.h>
 #include "rt.h"
 #include "rt_renderer.h"
 
@@ -24,7 +24,7 @@ int	rt_init_printer(
 	return (1);
 }
 
-void	release_printer(t_printer *printer)
+void	release_mlx_printer(t_printer *printer)
 {
 	t_data	*data;
 
@@ -33,7 +33,6 @@ void	release_printer(t_printer *printer)
 	{
 		mlx_destroy_image(data->mlx, data->img);
 		mlx_destroy_window(data->mlx, data->mlx_win);
-		mlx_destroy_display(data->mlx);
 		free(data);
 	}
 }
