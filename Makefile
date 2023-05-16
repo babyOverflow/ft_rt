@@ -13,6 +13,7 @@ SRCS := rt.c \
 	rt_geo/rt_camera.c \
 	rt_geo/rt_sphere.c \
 	rt_geo/rt_cylinder.c \
+	rt_geo/rt_cylinder_inter.c \
 	rt_geo/rt_plane.c \
 	rt_parse/rt_parse.c \
 	rt_parse/rt_parse_utils.c \
